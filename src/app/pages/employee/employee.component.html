@@ -1,0 +1,91 @@
+<div class="row"></div>
+<br>
+<div class="row mt-2"></div>
+<div class="row mt-2 justify-content-center">
+    <div class="col-12 col-md-10">
+        <div class="card shadow p-2">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 ">
+                        <div class="lead text-capitalize   ">
+                            <b>{{username}}</b>
+                        </div>
+                    </div>
+                    <div class="col-12 ">
+                        <div class="lead  ">
+                            <strong>Date of Joining: </strong> <span class="font-weight-normal">{{doj}}</span>
+                        </div>
+                    </div>
+                    <div class="col-12 ">
+                        <div class="lead text-ccapitalize ">
+                            <strong *ngIf="daystoogle">Service Expiry in </strong> <span class="font-weight-bolder text-danger">{{serviceExpiry}}</span>
+                            <strong *ngIf="daystoogle"> Days</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="row mt-2 justify-content-center">
+    <div class="col-12 col-md-10">
+        <div class="row">
+            <div class="col-auto ml-3">
+                <div class="text-uppercase h3">
+                    activity status
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div class="row mt-2 justify-content-center">
+    <div class="col-12 col-md-10" *ngIf="empty">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+
+                        <th scope="col">Name</th>
+                        <th scope="col">Service Request</th>
+                        <th scope="col">Status  </th>
+                        <th scope="col "></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of requestData">
+                        <td><span *ngFor="let x of item.data.guests;let last=last">{{x.item_text}}{{last?"":", "}}</span></td>
+                        <td>{{item.data.type}}</td>
+                        <td>
+                            <span [ngSwitch]="item.data.status">
+                                <i *ngSwitchCase="'red'" class="fas fa-circle text-danger" triggers="click" [autoClose]="true" ngbTooltip="vendor yet to  assign"></i>
+                                <i *ngSwitchCase="'green'" class="fas fa-circle text-success" triggers="click" [autoClose]="true" ngbTooltip="request successfull"></i>
+                                <i *ngSwitchCase="'cancel'"  class="fas fa-window-close text-danger" triggers="click" [autoClose]="true" ngbTooltip="request you cancelled" ></i>
+                                <i *ngSwitchCase="'rejected'" class="far fa-times-circle " style="color: darkorange;" triggers="click" [autoClose]="true" ngbTooltip="request Rejected" ></i>
+                                <i *ngSwitchCase="'yellow'" class="fas fa-circle text-warning" triggers="click" [autoClose]="true" ngbTooltip="request processing"> </i>
+                            </span></td>
+                        <td>
+                            <a [routerLink]="['./requestId',item._id]"><i class="fas fa-external-link-alt"></i></a>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-12 col-md-10">
+        <div class="card" *ngIf="!empty">
+            <div class="card-body">
+                <div class="row justify-content-center">
+                    <div class="col-auto">
+                        <div class="lead">No recent activity, please make a service request</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #tipContent></ng-template>

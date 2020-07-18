@@ -1,0 +1,214 @@
+<div class="row border-light border" *ngIf="request">
+    <div class="col-12">
+        <div class="mt-4 ">
+            <button type="button" (click)="backClicked()" class="btn  col-xs-2 btn-light"><i class="material-icons">
+                    arrow_back
+                </i>
+            </button>
+        </div>
+        <div class="row">
+            <div class="col  ">
+
+            </div>
+            <div class="col" *ngIf="request.data.qoutation">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col border-right">
+                <div class="card-body  ">
+                    <div class="h3   font-weight-bold text-capitalize   text-center mt-2">Hotel Booking Detail</div>
+
+                    <div>Name: {{request.data.name}}</div>
+                    <div>
+                        <!--Check in Date: {{request.data.detail.startDate.day}}/{{request.data.detail.startDate.month}}/{{request.data.detail.startDate.year}}-->
+                        Check In Date: {{request.data.detail.startDate| date:"MM/dd/yyy"}}
+                    </div>
+                    <div>
+                        <!--Check out Date: {{request.data.detail.endDate.day}}/{{request.data.detail.endDate.month}}/{{request.data.detail.endDate.year}}-->
+                        Check Out Date: {{request.data.detail.endDate| date:"MM/dd/yyy"}}
+                    </div>
+                    <div>Location: {{request.data.detail.location}}</div>
+
+                    <div>
+                        Request ID: {{request.data.requestkey}}
+
+                    </div>
+
+                    <div>
+                        Type: {{request.data.type}}
+                    </div>
+
+                    <div *ngIf="request.data.npeople>0">No of People: {{request.data.npeople}}
+                    </div>
+
+
+                    <div *ngIf="request.data.npeople==0&&(request.data.type=='Flight Booking'||request.data.type=='Hotel Booking')">
+                        No of People: 1(self)
+                    </div>
+                    <div *ngIf="request.data.guests.length>0">
+
+                        Guests:
+                        <span *ngFor="let itr of request.data.guests;let last=last">
+
+                            {{itr.item_text}}{{last?"":", "}}</span>
+                    </div>
+
+                    <div>
+                        Date of Booking: {{request.data.detail.date| date:"MM/dd/yyy"}}
+
+                    </div>
+                    <div>
+                        No of Rooms: {{request.data.detail.noroooms}}
+
+                    </div>
+                    <div *ngIf="request.data.detail.splitaccommodation">Split Accommodation: {{request.data.detail.splitaccommodation}}</div>
+                    <div *ngIf="request.data.detail.splitaccommodation">Reason for split: {{request.data.detail.reasonforsplit}}
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col" *ngIf="request.data.qoutation">
+                <div class="card-body">
+                    <div class="h3   font-weight-bold text-capitalize   text-center">Quotation Details</div>
+
+                    <div class=""> CheckIn : {{request.data.qoutation.checkin| date:"MM/dd/yyy"}}
+                    </div>
+                    <div class=""> CheckOut : {{request.data.qoutation.checkout| date:"MM/dd/yyy"}}
+                    </div>
+
+                    <div class="">Location : {{request.data.qoutation.location}}</div>
+
+                    <div class="">Price : Rs. {{request.data.qoutation.price}}</div>
+                    <div class="row mt-4">
+                        <div class="col-6" *ngIf="!request.data.pwcconfirmation"><button class="btn btn-outline-danger mt-2  w-100" (click)="decline()">decline</button></div>
+                        <div class="col-6" *ngIf="!request.data.pwcconfirmation"><button class="btn btn-outline-success mt-2 w-100" (click)="AcceptTheOrder()">accept</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col" *ngIf="request.data.modifiedData">
+                <div class="card-body  ">
+                    <div class="h3   font-weight-bold text-capitalize   text-center mt-2">Modified Request</div>
+
+                    <div>Name: {{request.data.name}}</div>
+                    <div>
+                        <!--Check in Date: {{request.data.detail.startDate.day}}/{{request.data.detail.startDate.month}}/{{request.data.detail.startDate.year}}-->
+                        Check In Date: {{request.data.modifiedData.startDate| date:"MM/dd/yyy"}}
+                    </div>
+                    <div>
+                        <!--Check out Date: {{request.data.detail.endDate.day}}/{{request.data.detail.endDate.month}}/{{request.data.detail.endDate.year}}-->
+                        Check Out Date: {{request.data.modifiedData.endDate| date:"MM/dd/yyy"}}
+                    </div>
+                    <div>Location: {{request.data.modifiedData.location}}</div>
+
+                    <div>
+                        Request ID: {{request.data.requestkey}}
+
+                    </div>
+
+                    <div>
+                        Type: {{request.data.type}}
+                    </div>
+
+                    <div *ngIf="request.data.modifiedData.npeople>0">No of People: {{request.data.npeople}}
+                    </div>
+
+
+                    <div *ngIf="request.data.modifiedData.npeople==0&&(request.data.modifiedData.type=='Flight Booking'||request.data.modifiedData.type=='Hotel Booking')">
+                        No of People: 1(self)
+                    </div>
+                    <div *ngIf="request.data.modifiedData.guest.length>0">
+
+                        Guests:
+                        <span *ngFor="let itr of request.data.modifiedData.guest;let last=last">
+
+                            {{itr.item_text}}{{last?"":", "}}</span>
+                    </div>
+
+                    <div>
+                        Date of Booking: {{request.data.detail.date| date:"MM/dd/yyy"}}
+
+                    </div>
+                    <div>
+                        No of Rooms: {{request.data.modifiedData.noroooms}}
+
+                    </div>
+                    <div *ngIf="request.data.modifiedData.splitAccomodation">Split Accommodation: {{request.data.modifiedData.splitAccomodation}}</div>
+                    <div *ngIf="request.data.modifiedData.splitAccomodation">Reason for split: {{request.data.modifiedData.reasonforsplit}}
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-6"><button class="btn btn-outline-danger mt-2  w-100 text-capitalize" (click)="declineModification()">decline modification</button></div>
+                        <div class="col-6"><button class="btn btn-outline-success mt-2 w-100 text-capitalize" (click)="AcceptModification()">accept modification</button></div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-12 text-right" *ngIf="request.data.voucher">
+            <button class="h5 btn btn-light" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">view ticket</button>
+        </div>
+        <hr>
+        <div class="row mt-4 justify-content-center " *ngIf="request.data.voucher">
+            <div id="collapseExample" class="collapse card-cody bg-light  rounded">
+                <figure class="figure">
+                    <img [src]="request.data.voucher" class="figure-img img-fluid rounded" *ngIf="request.data.voucher" style="max-width:300px;max-height:300px" />
+
+                </figure>
+                <div class="col-12">
+                    <button class="btn btn-outline-dark" (click)="sendVoucher()">send Voucher</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mt-4 justify-content-center   " *ngIf="request.data.remark">
+            <div class="col-10 ">
+                <div class="card-body rounded bg-secondary " style="height: 20rempx;overflow-x: hidden;overflow-x:auto;text-align:justify;  ">
+
+
+                    <div *ngFor="let remarksitem of request.data.remark">
+                        <div [ngSwitch]="remarksitem.role">
+                            <div class="textBody " *ngSwitchCase="'vendor'">
+                                <!-- <i class="fas fa-store fa-2x"></i> -->
+                                <p>{{remarksitem.message}}</p>
+                                <span class="time-right"> [{{remarksitem.time  | date:"HH:mm a"}}]
+                                    {{remarksitem.time| date: 'dd/MM/yyyy'}}</span>
+                            </div>
+                            <div class="textBody blueradmin " *ngSwitchCase="'admin'">
+                                <i class="fas fa-user-shield right"></i>
+                                <p>{{remarksitem.message}}</p>
+                                <span class="time-right"> [{{remarksitem.time  | date:"HH:mm a"}}]
+                                    {{remarksitem.time| date: 'dd/MM/yyyy'}}</span>
+                            </div>
+
+                            <div class="textBody darker" *ngSwitchCase="'processor'">
+                                <i class="fas fa-user-tie right"></i>
+                                <p>{{remarksitem.message}}</p>
+                                <span class="time-right"> [{{remarksitem.time  | date:"HH:mm a"}}]
+                                    {{remarksitem.time| date: 'dd/MM/yyyy'}}</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row my-4 justify-content-center align-items-center" *ngIf="request.data.remark">
+            <div class="col-6">
+                <label>Remarks </label>
+                <textarea class="form-control" cols="30" rows="5" [(ngModel)]="seprateremark.message"></textarea>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-outline-success w-100 " (click)="postremark()">post</button>
+                <button class="btn btn-outline-danger mt-2  w-100" (click)="decline()">decline</button>
+            </div>
+        </div>
+    </div>
+
+</div>

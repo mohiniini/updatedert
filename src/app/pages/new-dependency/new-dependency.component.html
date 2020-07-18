@@ -1,0 +1,95 @@
+<div class="row"></div>
+<br>
+<div class="row"></div>
+
+<div class="row  mt-5 pt-2">
+    <div class="col-12 mb-2">
+        <button type="button" (click)="backClicked()" class="btn w-100 col-xs-2 btn-secondary text-center">
+                <span class="mt-4">
+                    <i class="fas fa-long-arrow-alt-left"></i>
+                </span>
+                <span class="mt-0"> Back</span>
+            </button>
+    </div>
+    <div class="col-12">
+        <div class="">
+            <h3 class="h4 ml-3 mt-2">My Profile</h3>
+        </div>
+    </div>
+
+</div>
+<!--<div class="row m-2 mt-4">-->
+<!-- <div class="row m-2 mt-3 pt-2">
+    <button type="button" (click)="backClicked()" class="btn  col-xs-2 btn-light"><i class="material-icons">
+            arrow_back
+        </i>
+    </button>
+    <div class="pt-3">
+        <h3 class="">My Profile</h3>
+    </div>
+
+</div> -->
+
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="h5 ml-3 ">
+            New Dependent Details
+
+        </div>
+        <br/>
+
+        <div class="col-12  mb-5">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <form #f='ngForm'>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Name</label><span class="required">*</span>
+                                    <input type="text" name="n" #n='ngModel' class="form-control" [(ngModel)]="newName" pattern="[a-zA-Z\s]{1,}" required />
+                                    <div [hidden]="n.valid || n.pristine" class="alert alert-danger m-0 mt-2">Please use only alphabets </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail2">Date of Birth</label><span class="required">*</span>
+                                    <input type="date" class="form-control" (change)=" checkvalue(do.value)" [ngStyle]="{'border-left':dateValidation(do.value) ? '5px solid #42A948' : '5px solid #a94442' }" name="do" #do='ngModel' [(ngModel)]="newDob" required />
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Relation</label><span class="required">*</span>
+                                    <select name="relation" id="relation" name="rel" #rel='ngModel' [(ngModel)]="newRelation" class="form-control" required>
+                                                <option value="Father">Father</option>
+                                                <option value="Mother">Mother</option>
+                                                <option value="Son">Son</option>
+                                                <option value="Daughter">Daughter</option>
+                                                <option value="Spouse/Partner">Spouse/partner</option>
+                                            </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Gender</label><span class="required">*</span>
+                                    <select name="gender" id="gender" name="gen" #gen='ngModel' [(ngModel)]="newGender" class="form-control" required>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                                <option value="Others">Others</option>
+                                            </select> </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-auto">
+                            <button class="btn btn-success" (click)="saveNewDependency(f)">
+                                Add New Dependency 
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>

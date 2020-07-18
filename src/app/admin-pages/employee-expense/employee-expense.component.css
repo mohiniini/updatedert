@@ -1,0 +1,11 @@
+select{
+    font-size: 1rem;
+
+}
+.btn-outline-orange:hover{
+    color: white;
+    background-color: darkorange;
+}
+.btn-outline-orange{
+    color: darkorange;
+}

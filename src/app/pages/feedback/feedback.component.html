@@ -1,0 +1,40 @@
+<!--<div class="container">
+    <div style="text-align:center">
+        <h1 class="mt-6">
+            Please rate us
+        </h1>
+        
+        <ngb-rating [(rate)]="userRating" size="45px"></ngb-rating><br> {{userRating}}
+    </div>
+</div>-->
+
+<div class="row">
+    <div class="col border-right text-center ">
+        <div class="card-body">
+            <h1 class="mt-5 font-weight-bold text-capitalize   text-center">
+                Please rate us
+            </h1>
+
+
+            <ngb-rating [(rate)]="rating.stars" class="star">
+                <!--<ng-template let-fill="fill">
+                    <span class="star" [class.filled]="fill === 100">★</span>
+                </ng-template>-->
+
+            </ngb-rating>
+            <br> {{rating.stars}}
+
+            <br>
+
+            <div class="form-group">
+                <label for="typeahead-basic">Remarks</label>
+                <textarea type="text" class="form-control" rows="4" cols="40" name=rem [(ngModel)]="Remarks"></textarea>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-success " (click)="rateRequest()">Submit</button>
+        <button type="button" class="btn btn-danger ml-3" (click)="Norate()">Cancel</button>
+
+
+    </div>
+</div>

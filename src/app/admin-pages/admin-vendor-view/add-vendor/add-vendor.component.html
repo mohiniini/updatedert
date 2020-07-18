@@ -1,0 +1,98 @@
+<div class="row m-2 ">
+    <button type="button" (click)="backClicked()" class="btn  col-xs-2 btn-light"><i class="material-icons">
+            arrow_back
+          </i>
+        </button>
+</div>
+<div class="row ">
+    <div class="h3 font-weight-bold text-capitalize ml-4">Add New Vendor</div>
+</div>
+
+<div class="card">
+    <div class="card-body m-2">
+        <div class="row  justify-content-center">
+            <div class=" col-12 input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                </div>
+
+                <!--<div class="custom-file">
+                    <input type="file" class="custom-file-input" (change)="fileupload($event)" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>-->
+
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" (change)="fileupload($event)" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label">Choose file</label>
+                </div>
+
+
+            </div>
+
+
+            <div class="col-auto">
+                <button (click)="upload()" class="btn btn-outline-success">Save Upload</button>
+            </div>
+
+        </div>
+
+
+
+
+
+
+        <hr>
+        <form #f="ngForm">
+
+            <div class="form-group">
+                <label>Vendor Name</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" name="namee" #namee='ngModel' [(ngModel)]="name" pattern="[a-zA-Z\s]{1,}" required/>
+                <!--<input type="text" class="form-control" id="exampleInputPassword1" name="name" [(ngModel)]="name">-->
+            </div>
+
+
+            <div class="row m-2 ml-0 pl-0">
+                <div class="form-group col-12 ml-0 pl-0">
+                    <label class="ml-0 ">Domain</label>
+                    <form [formGroup]="myForm" class="w-100 ml-0 pl-0">
+                        <ng-multiselect-dropdown class="ml-0 pl-0" name="cityy" [placeholder]="'Select Domain'" [data]="cities" formControlName="city" [disabled]="disabled" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)">
+                        </ng-multiselect-dropdown>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+                <label>Address</label>
+                <input type="text" class="form-control" name="vendorDetailssss" #vendorDetailssss='ngModel' [(ngModel)]="address" required>
+                <!--<input type="text" class="form-control" name="vendorDetailssss" [(ngModel)]="address">-->
+            </div>
+
+
+
+            <div class="form-group">
+                <label>Email</label>
+                <!--<input type="email" class="form-control" name="vendorDetailsss" [formControl]="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required/>-->
+                <input type="email" class="form-control" name="vendorDetailssss1" [(ngModel)]="email" required>
+            </div>
+
+
+
+            <div class="form-group">
+                <label>Phone no </label>
+                <input type="text" class="form-control" name="vendorDetailsss" [(ngModel)]="phone_no" pattern="[6789][0-9]{9}" required/>
+            </div>
+
+        </form>
+
+        <div class="row m-2 justify-content-end">
+            <div class="col-2 m-0 p-0 ">
+                <button class="btn w-100 btn-outline-success float-right" [disabled]="!f.form.valid " (click)="save(f)">Save</button></div>
+        </div>
+
+
+    </div>
+</div>

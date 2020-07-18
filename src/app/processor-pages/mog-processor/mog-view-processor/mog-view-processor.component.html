@@ -1,0 +1,214 @@
+<div class="container border-light border" *ngIf="request">
+    <div class="row">
+        <div class=" pt-3 ml-1">
+            <button type="button" (click)="backClicked()" class="btn  col-xs-2 btn-light"><i class="material-icons">
+                                                    arrow_back
+                                                </i>
+                                            </button>
+        </div>
+        <div class="col  ">
+
+        </div>
+        <div class="col" *ngIf="request.data.qoutation">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col border-right">
+            <div class="card-body ">
+                <div class="h3   font-weight-bold text-capitalize   text-center mt-3">Goods Movement Detail</div>
+
+                <div class="lead"></div>
+
+                <div>
+                    Employee Name: {{request.data.name}}
+
+                </div>
+
+                <div>
+                    <!--Date of Movement: {{request.data.detail.dateofmovement.day}}/{{request.data.detail.dateofmovement.month}}/{{request.data.detail.dateofmovement.year}}-->
+                    <!--Date of Movement: {{request.data.detail.dateofmovement}}-->
+                    Date of Movement: {{request.data.detail.dateofmovement| date:"dd/MM/yyy"}}
+
+                </div>
+                <div>
+                    Pickup City : {{request.data.detail.pickupcity}}
+                </div>
+                <div>
+                    Request ID: {{request.data.requestkey}}
+                </div>
+
+                <div>Contact Person: {{request.data.detail.contactperson}}
+
+                </div>
+                <div>
+                    Delivery Address: {{request.data.detail.deliveryadd}}
+
+                </div>
+                <div>
+                    <!--Requirement of Storage : <span *ngIf="request.data.detail.requirementsofstorage==Yes">Yes</span><span *ngIf="request.data.detail.requirementsofstorage==No">No</span>-->
+                    Requirement of Storage : {{request.data.detail.requirementsofstorage}}
+
+                </div>
+
+                <div>
+                    Booking Date: {{request.data.detail.date| date:"MM/dd/yyy"}}
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+        <div class="col" *ngIf="request.data.qoutation">
+            <div class="card-body">
+                <div class="h3   font-weight-bold text-capitalize mt-3  text-center">Quotation details</div>
+
+                <div class="lead">Date of movement: {{request.data.qoutation.day.day}}/{{request.data.qoutation.day.month}}/{{request.data.qoutation.day.year}}
+                </div>
+
+                <div class="lead">Price : Rs. {{request.data.qoutation.price}}</div>
+                <div class="row mt-4 justify-content-end">
+                    <div class="col-4" *ngIf="qoutationToggle && !exceptionToggle&&AcceptDeclineToogle">
+                        <button class="btn btn-outline-danger mt-2  w-100" (click)="decline()">decline</button>
+                    </div>
+                    <div class="col-4" *ngIf="qoutationToggle && !exceptionToggle &&AcceptDeclineToogle">
+                        <button class="btn btn-outline-success mt-2 w-100" (click)="AcceptTheOrder()">accept</button>
+                    </div>
+                    <div class="col-4" *ngIf="qoutationToggle && !exceptionToggle &&AcceptDeclineToogle">
+                        <button class="btn btn-outline-info mt-2 w-100" (click)="exception()" >exception</button>
+                    </div>
+                    <div class="col-12 mt-2" *ngIf="request.data.pwcconfirmation">
+                        <div class="alert alert-success" role="alert">
+                            Quotation Accepted
+                        </div>
+                    </div>
+                    <div class="col-12 mt-2" *ngIf="exceptionAlert&&!request.data.pwcconfirmation">
+                        <div class="alert alert-info" role="alert">
+                            exception has been raised
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col border-right" *ngIf="request.data.modifiedData" >
+            <div class="card-body ">
+                <div class="h3   font-weight-bold text-capitalize mt-3   text-center">modified Request</div>
+
+                <div class="lead"></div>
+
+                <div>
+                    Employee Name: {{request.data.name}}
+
+                </div>
+
+                <div>
+                    <!--Date of Movement: {{request.data.detail.dateofmovement.day}}/{{request.data.detail.dateofmovement.month}}/{{request.data.detail.dateofmovement.year}}-->
+                    Date of Movement : {{request.data.modifiedData.dateofmovement| date:"dd/MM/yyy"}}
+
+                </div>
+                <div>
+                    Pickup City : {{request.data.modifiedData.pickupcity}}
+                </div>
+                <div>
+                    Request ID: {{request.data.requestkey}}
+                </div>
+
+                <div>Contact Person: {{request.data.modifiedData.contactperson}}
+
+                </div>
+                <div>
+                    Delivery Address: {{request.data.modifiedData.deliveryadd}}
+
+                </div>
+                <div>
+                    <div *ngIf="request.data.modifiedData.requirementsofstorage">Requirement of Storage : 
+                        {{request.data.modifiedData.requirementsofstorage}}
+                    </div>
+                    <div *ngIf="!request.data.modifiedData.requirementsofstorage=='No'">Requirement of Storage : No
+                    </div>
+                    <!--Requirement of Storage : <span *ngIf="request.data.detail.requirementsofstorage==true">yes</span><span *ngIf="request.data.detail.requirementsofstorage==false">no</span> -->
+                </div>
+
+                <div>
+                    Booking Date: {{request.data.detail.date| date:"dd/MM/yyy"}}
+
+                </div>
+                <div class="row mt-4">
+                    <div class="col-6" ><button class="btn btn-outline-danger mt-2  w-100 text-capitalize" (click)="declineModification()">decline modification</button></div>
+                    <div class="col-6" ><button class="btn btn-outline-success mt-2 w-100 text-capitalize"  (click)="AcceptModification()">accept modification</button></div>
+                    
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+    <br>
+    <hr>
+    <div class="row mt-4 justify-content-center " *ngIf="request.data.voucher">
+        <div class="col-12 text-right" *ngIf="request.data.voucher"><button class="h5 btn btn-light" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">view ticket</button>
+        </div>
+        <hr>
+        <div id="collapseExample" class="collapse card-cody bg-light  rounded">
+            <figure class="figure">
+                <img [src]="request.data.voucher" class="figure-img img-fluid rounded" *ngIf="request.data.voucher" style="max-width:300px;max-height:300px" />
+
+            </figure>
+            <div class="col-12">
+                <button class="btn btn-outline-dark" (click)="sendVoucher()">send Voucher</button>
+            </div>
+        </div>
+
+    </div>
+    <div class="row mt-4 justify-content-center   " *ngIf="request.data.remark">
+        <div class="col-10 ">
+            <div class="card-body rounded bg-secondary " style="width:918px;height: 442px;overflow-x: hidden;overflow-x:auto;text-align:justify;  ">
+
+
+                <div *ngFor="let remarksitem of request.data.remark">
+                    <div [ngSwitch]="remarksitem.role">
+                        <div class="textBody " *ngSwitchCase="'vendor'">
+                            <!-- <i class="fas fa-store fa-2x"></i> -->
+                            <p>{{remarksitem.message}}</p>
+                            <span class="time-right"> [{{remarksitem.time  | date:"HH:mm a"}}] {{remarksitem.time| date: 'dd/MM/yyyy'}}</span>
+                        </div>
+                        <div class="textBody blueradmin " *ngSwitchCase="'admin'">
+                            <i class="fas fa-user-shield right"></i>
+                            <p>{{remarksitem.message}}</p>
+                            <span class="time-right"> [{{remarksitem.time  | date:"HH:mm a"}}] {{remarksitem.time| date: 'dd/MM/yyyy'}}</span>
+                        </div>
+
+                        <div class="textBody darker" *ngSwitchCase="'processor'">
+                            <i class="fas fa-user-tie right"></i>
+                            <p>{{remarksitem.message}}</p>
+                            <span class="time-right"> [{{remarksitem.time  | date:"HH:mm a"}}] {{remarksitem.time| date: 'dd/MM/yyyy'}}</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row my-4 justify-content-center align-items-center" *ngIf="request.data.remark">
+        <div class="col-6">
+            <label>Remarks </label>
+            <textarea class="form-control" cols="30" rows="5" [(ngModel)]="seprateremark.message"></textarea>
+        </div>
+        <div class="col-2 ">
+            <button class="btn btn-outline-success w-100 " (click)="postremark()">Post</button>
+            <button class="btn btn-outline-danger mt-2  w-100" (click)="decline()">Decline</button>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,244 @@
+<div class="row"></div>
+<br>
+<div class="row"></div>
+
+<!--<div class="row m-2 mt-4">-->
+<div class="row  mt-5 pt-2">
+    <div class="col-12 mb-2">
+        <button type="button" (click)="backClicked()" class="btn w-100 col-xs-2 btn-secondary text-center">
+            <span class="mt-4">
+                <i class="fas fa-long-arrow-alt-left"></i>
+            </span>
+            <span class="mt-0"> Back</span>
+        </button>
+    </div>
+    <div class="col-12">
+        <div class="">
+            <h3 class="ml-3">My Profile</h3>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="h4 ml-3">
+            Dependent Details
+            <div class="float-right">
+                <!-- <button class="btn bg-transparent" (click)="changeCollapse()" *ngIf="!addD" data-toggle="collapse"
+                    data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i
+                        style="font-size: 3rem" class="material-icons">
+                        add_circle_outline
+                    </i></button> -->
+                <button class="btn bg-transparent" (click)="addnewdependency()" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i
+                        style="font-size: 3rem" class="material-icons">
+                        add_circle_outline
+                    </i></button>
+
+            </div>
+
+            <div class="float-right">
+                <a (click)="changeCollapse()" *ngIf="addD" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" (click)="saveEmployee()"><i
+                        style="font-size: 3rem" class="material-icons">
+                        check
+                    </i></a>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="container">
+        </div>
+
+        <div class="col-12  mb-5">
+            <div class="table-responsive-sm">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+
+                            <th scope="col">Name</th>
+                            <th scope="col">DOB</th>
+                            <th scope="col">Relation</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Edit</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr scope="row" *ngIf="addD">
+                            <td>
+                                <input type="text" [formControl]="name" class="form-control" pattern="[a-zA-Z]{3,}" required />
+                            </td>
+                            <td>
+                                <input type="date" [formControl]="dob" class="form-control" required />
+                            </td>
+
+                            <td>
+                                <select name="relation" id="relation" [formControl]="relation" required class="form-control">
+                                    <option value="father">Father</option>
+                                    <option value="mother">Mother</option>
+                                    <option value="son">Son</option>
+                                    <option value="daughter">Daughter</option>
+                                    <option value="spouse/partner">Spouse/Partner</option>
+                                </select>
+                            </td>
+
+
+                            <td>
+                                <select name="gender" id="gender" [formControl]="gender" required class="form-control">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                   
+                                </select>
+                            </td>
+
+                        </tr>
+
+
+                        <tr scope="row" *ngFor="let item of completedetail.data.guests;let i=index">
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.dob }}</td>
+                            <td class="text-capitalize">{{ item.relation }}</td>
+                            <td class="text-lowercase text-capitalize">{{ item.gender }}</td>
+                            <td class="text-center">
+                                <!-- <i (click)=nav(i) class="material-icons">
+                                    build
+                                </i> -->
+                                <i class="fas fa-pencil-alt" (click)=nav(i)></i>
+
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+<!-- <div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">My Data</div>
+                <div class="form-group" *ngFor="let item of employee | keyvalue">
+                    <label class="text-muted" *ngIf="item.key != 'guests'">{{
+            item.key
+          }}</label>
+
+                    <div>
+                        <b class="form-control" readonly *ngIf="item.key != 'guests'">{{
+              item.value
+            }}</b>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div> -->
+
+<!--<div class="row m-2"> -->
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    <div class="h3">My Data
+                        <!-- <span class="float-right" *ngIf="edittoggle" (click)="editbuttontoggle()"><i class="fas fa-pencil-alt" style="font-size: 1rem;"></i></span> -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label> Full Name</label>
+                    <input disabled class="form-control" id="exampleInputPassword1" [(ngModel)]="this.completedetail.data.Person_Full_Name_First_Last">
+
+                </div>
+
+                <div class="form-group ">
+                    <label> Email </label>
+                    <input disabled class="form-control " id="exampleInputPassword1 " [(ngModel)]="this.completedetail.data.email">
+                </div>
+
+                <div class="form-group ">
+                    <label>Phone no.</label>
+                    <input disabled class="form-control " id="exampleInputPassword1 " [formControl]="phno" pattern="[0-9]{10}">
+
+                </div>
+
+                <!-- <div class="form-group ">
+                    <label>Contact no.</label>
+                    <input disabled class="form-control " id="exampleInputPassword1 " [(ngModel)]="this.completedetail.data.Offer_Intake_Global_Telephone ">
+                </div>-->
+
+                <div class="form-group ">
+                    <label class="text-capitalize ">Date of birth</label>
+                    <input disabled class="form-control " id="exampleInputPassword1 " [(ngModel)]="empdob">
+                    <!--<input type="text " class="form-control " id="exampleInputPassword1 " [(ngModel)]="emp.Offer_Intake_Global_Job_Location_City ">-->
+                </div>
+
+                <!--<div class="form-group ">
+                    <label>Person : Start Date</label>
+                    <br>
+                    <ngb-datepicker #dp [(ngModel)]="model" (navigate)="date = $event.next"></ngb-datepicker>
+                    <input disabled class="form-control " id="exampleInputPassword1 " [(ngModel)]="this.completedetail.data.model2">
+                </div> -->
+
+
+                <!-- <div class="form-group ">
+                    <label>Date of Birth</label><br>
+                    <ngb-datepicker #dp [(ngModel)]="model2" (navigate)="date = $event.next"></ngb-datepicker>
+
+                </div>-->
+
+                <!--  </div>-->
+
+                <!--<div class="form-group ">
+                    <label>Nationality</label>
+
+                    <input disabled class="form-control " id="exampleInputPassword1 "
+                        [(ngModel)]="this.completedetail.data.nationality">
+                </div>-->
+
+                <div class="form-group ">
+                    <label>Entity</label>
+
+                    <input disabled class="form-control " id="exampleInputPassword1 " [(ngModel)]="this.completedetail.data.entity">
+                </div>
+
+                <div class="form-group ">
+                    <label>Joining Location</label>
+
+                    <input disabled class="form-control " id="exampleInputPassword1 " [(ngModel)]="this.completedetail.data.joininglocation">
+                </div>
+                <div class="form-group ">
+                    <label>Date of Joining </label>
+
+                    <input disabled class="form-control " id="exampleInputPassword1 " [(ngModel)]="this.completedetail.data.Offer_Intake_Global_Tentative_Start_Date">
+                </div>
+                <button class="btn btn-success" (click)="updateDob()" *ngIf="!edittoggle">
+                    Update Contact
+                </button>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

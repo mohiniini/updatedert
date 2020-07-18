@@ -1,0 +1,176 @@
+<!-- i. Salutation
+ii. First Name
+iii. Middle Name
+iv. Last Name 
+v. Gender
+vi. Date of Birth
+vii. City where stay required
+viii. Check In Date
+ix.  Check Out Date
+x. Any additional request (Free Field with disclaimer subject to availability at property) -->
+<h3>Accommodation</h3>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">
+          Self
+        </div>
+        <div class="card-text">
+          <div class="form-group">
+            <label class="text-muted">First Name</label>
+            <div>
+              <b class="form-control" readonly>{{
+                employeeDetails.firstname
+              }}</b>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="text-muted">Middle</label>
+            <div>
+              <b class="form-control" readonly>{{
+                employeeDetails.middlename
+              }}</b>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="text-muted">Last Name</label>
+            <div>
+              <b class="form-control" readonly>{{
+                employeeDetails.lastname
+              }}</b>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="text-muted">Date of Birth</label>
+            <div>
+              <b class="form-control" readonly>{{ employeeDetails.dob }}</b>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="text-muted">Gender</label>
+            <div>
+              <b class="form-control" readonly>{{ employeeDetails.gender }}</b>
+            </div>
+          </div>
+
+          <!--  -->
+
+          <div class="form-group">
+            <label class="text-muted">City</label>
+            <input
+              id="typeahead-focus"
+              type="text"
+              class="form-control"
+              [(ngModel)]="model"
+              [ngbTypeahead]="search"
+              (focus)="focus$.next($event.target.value)"
+              (click)="click$.next($event.target.value)"
+              #instance="ngbTypeahead"
+              placeholder="Search Your City"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="text-muted">Choose Your Date</label>
+
+            <br />
+
+            <ngb-datepicker
+              #dp
+              (select)="onDateSelection($event)"
+              [displayMonths]="2"
+              [dayTemplate]="t"
+              outsideDays="hidden"
+            >
+            </ngb-datepicker>
+
+            <ng-template #t let-date let-focused="focused">
+              <span
+                class="custom-day"
+                [class.focused]="focused"
+                [class.range]="isRange(date)"
+                [class.faded]="isHovered(date) || isInside(date)"
+                (mouseenter)="hoveredDate = date"
+                (mouseleave)="hoveredDate = null"
+              >
+                {{ date.day }}
+              </span>
+            </ng-template>
+            <br />
+          </div>
+
+          <div class="form-group">
+            <label class="text-info">Any additional request </label>
+
+            <textarea class="form-control" rows="5"> </textarea>
+            <br>
+            <b class="text-danger "  >*Free Field with disclaimer subject to availability at property</b>
+          </div>
+
+          <div class="form-group">
+            <label class="text-muted">Your Guests</label>
+
+            <div class="mdc-chip-set">
+              <button class="mdc-chip" *ngFor="let item of guestList"  (click)="removeGuest(item)"  >
+                <span class="mdc-chip__text">{{item.name}}</span>
+              </button>
+
+              <button class="mdc-chip" *ngIf="guestList.length==0" >
+                    <span class="mdc-chip__text text-danger">No Guest</span>
+                  </button>
+              
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-success" style="margin-left: 90%" >Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="margin-top: 5%;margin-bottom: 5%">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">
+          Your Guests Available
+        </div>
+
+        <div class="card-text">
+          <div class="table-responsive-sm">
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">DOB</th>
+                  <th scope="col">Relationship</th>
+                  <th scope="col">Gender</th>
+                  <th scope="col">Option</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr scope="row" *ngFor="let item of employeeDetails.guests">
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.dob }}</td>
+                  <td>{{ item.relation }}</td>
+                  <td>{{ item.gender }}</td>
+                  <td>
+                    <button type="button" class="btn-sm btn-info" (click)="addGuest(item)"  >
+                      Add Guest
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

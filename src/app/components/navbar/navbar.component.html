@@ -1,0 +1,79 @@
+<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-danger justify-content-between py-0">
+  <a class="navbar-brand " href="javascript:void(0)">
+    <span *ngIf="role!=='employee'">
+      <span (click)="sendMessage()"  *ngIf="show=='open'" style="font-size: 1.3rem;">
+        <i class="fas fa-bars"></i>
+      </span>
+    </span>
+    <span (click)="sendMessage()" *ngIf="show=='close'" style="font-size: 1.2rem;">
+      <i class="fas fa-bars"></i>
+    </span> Employee Relocation
+  </a>
+  
+
+
+  <!-- <div class="collapse navbar-collapse" id="navbarColor02"> -->
+  <div>
+    <ul class="navbar-nav mr-auto">
+
+      <!-- <li class="nav-item"*ngIf="role=='employee'" >
+        <a class="nav-link"  [routerLink]="['employee']">Employee</a>
+      </li>-->
+      <!-- <li class="nav-item" *ngIf="role=='admin'">
+        <a class="nav-link" *ngIf="admin"  >Admin</a>
+      </li> -->
+      <!-- <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">PWC</a>
+            </li> -->
+      <li class="nav-item">
+
+      </li>
+
+
+      <!-- <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown link
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li> -->
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <button class="btn nav-link bg-transparent " (click)="logOut()"><i
+            class="material-icons bg-transparent mt-0 p-0 text-white-50">
+            power_settings_new
+          </i></button>
+      </li>
+    </ul>
+    <!--<div class="form-inline">
+            <input id="typeahead-basic" name="search" class="form-control mr-sm-2" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" />
+
+            <button class="btn btn-outline-light my-2 my-sm-0" style="margin-left: 6px" type="submit">Search</button>
+        </div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+</div>

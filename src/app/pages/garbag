@@ -1,0 +1,19 @@
+<div class="row"></div>
+<br>
+<div class="row"></div>
+
+<div class="row m-2 ">
+  <button type="button" (click)="backClicked()" class="btn  col-xs-2 btn-light"><i class="material-icons">
+      arrow_back
+    </i>
+  </button>
+</div>
+
+
+ backClicked() {
+    this._location.back();
+  }
+
+
+
+,private _location: Location

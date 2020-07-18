@@ -1,0 +1,752 @@
+<ng-container #flight *ngIf="type=='Flight Booking'">
+    <div class="row"></div>
+    <br>
+    <div class="row"></div>
+
+    <div class="row  mt-5 pt-2">
+        <div class="col-12 mb-2">
+            <button type="button" (click)="backClicked()" class="btn w-100 col-xs-2 btn-secondary text-center">
+                <span class="mt-4">
+                    <i class="fas fa-long-arrow-alt-left"></i>
+                </span>
+                <span class="mt-0"> Back</span>
+            </button>
+        </div>
+        <div class="col-12">
+            <div class="mt-3">
+                <h3 class=""></h3>
+            </div>
+        </div>
+
+    </div>
+    <!--<div class="row m-2 mt-4">-->
+    <!-- <div class="row m-2 mt-3 pt-2">
+    <button type="button" (click)="backClicked()" class="btn  col-xs-2 btn-light"><i class="material-icons">
+            arrow_back
+        </i>
+    </button>
+    <div class="pt-3">
+        <h3></h3>
+    </div>
+</div> -->
+    <!--<div class="row">
+    <h3></h3>
+</div> -->
+
+    <!-- <app-userdetails [employee]="employee"></app-userdetails> -->
+
+    <div class="row" style="margin-top:5%;margin-bottom:10%">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h3> Booking Details</h3>
+                    </div>
+
+                    <form #f="ngForm">
+                        <div class="form-group">
+                            <label>Travellers </label> <span class="required">*</span>
+                            <ng-multiselect-dropdown [placeholder]="'Select Options'" name="cd" #cd='ngModel' [data]="dropdownList" [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" *ngIf="dropdownList.length > 0"
+                                required>
+                            </ng-multiselect-dropdown>
+                        </div>
+
+
+                        <div class="form-group row m-2">
+                            <label for="exampleInputEmail1">Date of Travel</label><span class="required">*</span>
+                            <input type="date" class="form-control" name="do" #do='ngModel' [(ngModel)]="dateoftravel" required />
+                        </div>
+                        <div class="form-group">
+                            <label>Preferred Time of Travel</label><span class="required">*</span>
+
+                            <ngb-timepicker [(ngModel)]="time" name="vf" #vf='ngModel' [meridian]="meridian"></ngb-timepicker>
+                        </div>
+
+
+                        <div class="form-group row m-2">
+                            <label for="typeahead-basic">Departure Location </label> <span class="required">*</span>
+                            <select class="form-control" value="others" name="dep" #dep='ngModel' [(ngModel)]="request.data.detail.dep" required>
+                                <!--<div [hidden]="dep.valid || dep.pristine" class="alert alert-danger m-0 mt-2">Arrival and depature should not be same </div>-->
+                                <option [value]=item *ngFor="let item of city1"
+                                    [disabled]="request.data.detail.dep==item">{{item}} </option>
+                                <div [hidden]="dep.valid || dep.pristine" class="alert alert-danger m-0 mt-2">Fill valid
+                                    option </div>
+                                <!--<option [value]=item  *ngFor="let item of city1">{{item}} </option>-->
+                            </select>
+                        </div>
+
+                        <div class="form-group row m-2" *ngIf="request.data.detail.dep== 'Others'">
+                            <!--<label for="typeahead-basic">Name the departure location</label><span class="required">*</span>-->
+                            <input id="typeahead-basic" type="text" name="dep" #dep='ngModel' class="form-control" [(ngModel)]="request.data.detail.reasonforothers" pattern="[a-zA-Z]{1,}" required />
+                        </div>
+
+                        <!--<div class="form-group row m-2" *ngIf="arrModel == depModel">
+                        <label for="typeahead-basic">Name the Arrival location</label><span class="required">*</span>
+                        <input id="typeahead-basic1" type="text" name="er3" #er3='ngModel' disabled class="form-control" [(ngModel)]="reason3" required/>
+                    </div>-->
+
+
+
+
+                        <!--<div class="form-group">
+                    <label for="typeahead-basic">Arrival Location</label>
+                    <input id="typeahead-basic" type="text" class="form-control" name="arrModel" [formControl]="arrModel" pattern="[a-zA-Z]{3,}" required [ngbTypeahead]="search" />
+                </div>-->
+
+                        <div class="form-group row m-2">
+                            <label for="typeahead-basic">Arrival Location</label><span class="required">*</span>
+                            <select class="form-control" value="Others" name="cdc" #cdc='ngModel' [(ngModel)]="arrivallocation" required>
+                                <option [value]=item *ngFor="let item of city"
+                                    [disabled]="request.data.detail.dep==item">{{item}} </option>
+                                <div [hidden]="cdc.valid || cdc.pristine" class="alert alert-danger m-0 mt-2">Fill valid
+                                    option </div>
+                                <!--<option [value]=item *ngFor="let item of city">{{item}} </option>-->
+
+                            </select>
+                        </div>
+
+                        <div class="form-group row m-2" *ngIf="request.data.detail.arr == 'Others'">
+                            <!--<label for="typeahead-basic">Name the Arrival location</label><span class="required">*</span>-->
+                            <input id="typeahead-basic1" type="text" name="er" value="request.data.detail.reasonforothers1" #er='ngModel' class="form-control" [(ngModel)]="request.data.detail.reasonforothers1" pattern="[a-zA-Z]{3,60}" required />
+                        </div>
+
+
+
+
+
+
+                        <div class="form-group row m-2">
+                            <label>Preferred Meal Type</label><span class="required">*</span>
+                            <select class="form-control" name="request.detail.meal" [(ngModel)]="meal" required>
+                                <option value="Veg">Veg</option>
+                                <option value="Non-Veg">Non-Veg</option>
+                                <option value="None">None</option>
+                            </select>
+                        </div>
+
+
+
+                        <div class="alert alert-info m-2" role="alert">
+                            <h6><b>NOTE: </b>Please Carry a Government ID Proof </h6>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="col-auto m-2">
+                                <button type="button" class="btn btn-outline-success" [disabled]="!f.form.valid" (click)="updateReq()">Update</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container #hotel *ngIf="type=='Hotel Booking'">
+    <div class="row"></div>
+    <br>
+    <div class="row"></div>
+    <div class="row  mt-5 pt-2">
+        <div class="col-12 mb-2">
+            <button type="button" (click)="backClicked()" class="btn w-100 col-xs-2 btn-secondary text-center">
+                <span class="mt-4">
+                    <i class="fas fa-long-arrow-alt-left"></i>
+                </span>
+                <span class="mt-0"> Back</span>
+            </button>
+        </div>
+        <div class="col-12">
+            <div class="">
+                <h3 class="">Hotel Booking</h3>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="row" style="margin-top:5%;margin-bottom:10%">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class=" card-title lead">
+                        Booking Details
+                    </div>
+
+
+                    <div class="form-group ">
+                        <label>Guests</label><span class="required">*</span>
+
+                        <ng-multiselect-dropdown [placeholder]="'Select Options'" [data]="dropdownList" [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" *ngIf="dropdownList.length > 0" required>
+                        </ng-multiselect-dropdown>
+                    </div>
+
+                    <div class="form-group row m-2">
+                        <label for="typeahead-basic">Do you want to split accommodation?</label><span class="required">*</span>
+                        <select class="form-control" name="fr" #fr='ngModel' [(ngModel)]="splitAccomodation" (change)="splitlogic(fr.value)" required>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group row m-2" *ngIf="request.data.detail.splitAccomodation == 'Yes'">
+                        <label for="typeahead-basic">Reason for split</label><span class="required">*</span>
+                        <input id="typeahead-basic" type="text" class="form-control" name="split" #split='ngModel' pattern="[a-zA-Z\s]{1,}" [(ngModel)]="reasonforsplit" required />
+                    </div>
+
+
+                    <div class="form-group row m-2">
+                        <label for="exampleInputEmail1">Check In</label><span class="required">*</span>
+                        <input type="date" class="form-control" name="in" #in='ngModel' [(ngModel)]="checkinstartDate" required />
+                    </div>
+
+
+
+                    <div class="form-group row m-2">
+                        <label for="exampleInputEmail1">Check Out</label><span class="required">*</span>
+                        <input type="date" class="form-control" name="out" #out='ngModel' [(ngModel)]="checkoutendDate" required />
+                    </div>
+
+
+
+
+
+
+                    <div class="form-group row m-2">
+                        <label for="typeahead-basic">Destination Location (if not listed, please select
+                            other)</label><span class="required">*</span>
+                        <select class="form-control" #dep='ngModel' value="request.data.detail.location" name="dep" [(ngModel)]="destinationlocation" required>
+                            <option [value]="item" *ngFor="let item of hotelcity">{{item}} </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group row m-2" *ngIf="request.data.detail.location == 'Others'">
+                        <input id="typeahead-basic1" type="text" name="er" #er='ngModel' class="form-control" [(ngModel)]="reasonvaluehotel" pattern="[a-zA-Z]{3,60}" required />
+                    </div>
+
+                    <div class="form-group row m-2">
+                        <label for="typeahead-basic">Number of rooms</label><span class="required">*</span>
+                        <select class="form-control" name="roo" #roo='ngModel' [(ngModel)]="noofrooms" required>
+                            <option value="1">1</option>
+                            <option value="2">2 </option>
+                            <option value="3">3 </option>
+                            <option value="4">4 </option>
+                            <option value="5">5 </option>
+
+                        </select>
+                    </div>
+                    <div class="row justify-content-end">
+                        <div class="col-auto m-2">
+                            <button type="button" class="btn btn-outline-success" (click)="updateReq()">Update</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</ng-container>
+
+<ng-container #expen *ngIf="type=='Expense Reimbersement'">
+    <div class="row"></div>
+    <br>
+    <div class="row"></div>
+
+    <div class="row mt-5 pt-2">
+        <div class="col-12 mb-2">
+            <button type="button" (click)="backClicked()" class="btn w-100 col-xs-2 btn-secondary text-center">
+                <span class="mt-4">
+                    <i class="fas fa-long-arrow-alt-left"></i>
+                </span>
+                <span class="mt-0"> Back</span>
+            </button>
+        </div>
+        <div class="col-12">
+            <div class="">
+                <h3 class="">Expense Reimbursements</h3>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="row" style="margin-top:5%;margin-bottom:10%">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        Submit Expenses
+                    </div>
+                    <form #f='ngForm'>
+
+                        <div class="form-group m-2">
+                            <label>Nature of expense</label><span class="required">*</span>
+                            <select class="form-control" name="ddf" #ddf='ngModel' [(ngModel)]="natureOfExpense" required>
+                                <option value="Flight Booking">Flight Booking</option>
+                                <option value="Hotel Booking">Hotel Booking</option>
+                                <option value="Movements of goods ">Movements of goods</option>
+                                <option value="Movements of vehicles">Movements of vehicles</option>
+                                <option value="Cab booking">Cab booking</option>
+
+                            </select>
+                        </div>
+
+                        <div class="form-group m-2">
+                            <label>Amount</label><span class="required">*</span>
+                            <input type="number" class="form-control" name="amount1" #amount1='ngModel' [(ngModel)]="amountreimbursment" pattern="[0-9]{1,}" required>
+
+                        </div>
+
+
+
+
+                        <div class="form-group m-2">
+                            <label>Invoice no</label><span class="required">*</span>
+                            <input type="text" class="form-control" name="invoiceno1" #invoiceno1='ngModel' [(ngModel)]="invoicereim" pattern="[a-zA-Z0-9\s]{2,60}" required>
+                            <div [hidden]="invoiceno1.valid ||invoiceno1.pristine" class="alert alert-danger m-0 mt-2">
+                                Fill valid invoiceno. </div>
+
+                        </div>
+
+
+
+                        <div class="form-group m-2">
+
+                            <div class=" form-group input-group my-3  mr-4 ">
+
+                                <div class=" form-group input-group my-3  mr-4 ">
+                                    <p class="form-label-group "> Upload</p>
+                                    <input type="file" class="form-control-file" accept="image/*" (change)="handleInputChange1($event)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="alert alert-info m-2" role="alert">
+                            <h6><b>NOTE: </b> Please upload an image less than 100kb.</h6>
+                        </div> -->
+
+                        <img [src]="imgreiem" *ngIf="request.data.detail.invoiceimage" height="auto" width="50%" />
+                        <button type="button " class="m-2 float-right btn btn-outline-success" [disabled]="!f.form.valid" (click)="updateReq()">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container #cab *ngIf="type=='Cab Booking'">
+    <div class="row"></div>
+    <br>
+    <div class="row"></div>
+    <div class="row mt-5 pt-2">
+        <div class="col-12 mb-2">
+            <button type="button" (click)="backClicked()" class="btn w-100 col-xs-2 btn-secondary text-center">
+                <span class="mt-4">
+                    <i class="fas fa-long-arrow-alt-left"></i>
+                </span>
+                <span class="mt-0"> Back</span>
+            </button>
+        </div>
+        <div class="col-12">
+            <div class="">
+                <h3 class="">Cab Booking</h3>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row" style="margin-top:5%;margin-bottom:10%">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h3>Booking Details</h3>
+                    </div>
+
+                    <form #f='ngForm'>
+                        <div class="form-group">
+                            <label>Passengers</label><span class="required">*</span>
+
+                            <ng-multiselect-dropdown [placeholder]="'Select Options'" [data]="dropdownList" name="pas" #pass='ngModel' [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" *ngIf="dropdownList.length > 0"
+                                required>
+                            </ng-multiselect-dropdown>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Date of Movement</label><span class="required">*</span>
+                            <input type="date" class="form-control" name="do" #do='ngModel' [(ngModel)]="dateofmovementcab" required />
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Preferred Time of Travel</label><span class="required">*</span>
+
+                            <ngb-timepicker [(ngModel)]="preferedtimecab" name="tym" #tym='ngModel' [meridian]="meridian">
+                            </ngb-timepicker>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="typeahead-basic">Current Location</label><span class="required">*</span>
+                            <input id="typeahead-basic1" type="text" class="form-control" name="depModel1" #depModel1='ngModel' [(ngModel)]="currentlocationcab" pattern="[a-zA-Z0-9\s]{3,}" required />
+                            <div [hidden]="depModel1.valid || depModel1.pristine" class="alert alert-danger m-0 mt-2">
+                                Please fill correct current location </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="typeahead-basic">Destination Location</label><span class="required">*</span>
+                            <input id="typeahead-basic2" type="text" class="form-control" name="arrModel1" #arrModel1='ngModel' [(ngModel)]="destinationcab" pattern="[a-zA-Z0-9\s]{3,}" required />
+                            <div [hidden]="arrModel1.valid || arrModel1.pristine" class="alert alert-danger m-0 mt-2">
+                                Please fill correct destination location </div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="col-auto m-2">
+                                <button type="button" class="btn btn-outline-success" [disabled]="!f.form.valid" (click)="updateReq()">Update</button>
+                            </div>
+                        </div>
+
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container #mogoo *ngIf="type=='Goods Movement'">
+    <div class="row">
+    </div>
+    <br>
+    <div class="row"></div>
+    <div class="row  mt-5 pt-2">
+        <div class="col-12 mb-2">
+            <button type="button" (click)="backClicked()" class="btn w-100 col-xs-2 btn-secondary text-center">
+                <span class="mt-4">
+                    <i class="fas fa-long-arrow-alt-left"></i>
+                </span>
+                <span class="mt-0"> Back</span>
+            </button>
+        </div>
+        <div class="col-12">
+            <div class="">
+                <h3 class="">Goods Movement</h3>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row" style="margin-top:5%;margin-bottom:10%">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        Booking Details
+                    </div>
+
+
+
+                    <form #f="ngForm">
+
+
+
+                        <div class="form-group m-2">
+                            <label for="exampleInputEmail1">Date of Movement</label><span class="required">*</span>
+                            <input type="date" class="form-control" name="do" #do='ngModel' [(ngModel)]="request.data.detail.dateofmovement" required />
+                        </div>
+
+
+                        <div class="form-group m-2">
+                            <label for="typeahead-basic">Pickup city (if not listed, please select other)</label><span class="required">*</span>
+                            <select class="form-control" name="dcd" value="pickUpCity" #dcd='ngModel' [(ngModel)]="request.data.detail.pickupcity" required>
+                                <option [value]=item *ngFor="let item of city">{{item}}</option>
+
+                            </select>
+                        </div>
+
+                        <div class="form-group row m-2" *ngIf="request.data.detail.pickupcity == 'Others'">
+
+                            <input id="typeahead-basic1" type="text" name="er1" #er1='ngModel' class="form-control" value="request.data.detail.pickupcityreason" [(ngModel)]="request.data.detail.pickupcityreason" pattern="[a-zA-Z]{1,}" required />
+                        </div>
+
+
+
+                        <div class="form-group m-2">
+                            <label for="typeahead-basic">Delivery City (if not listed, please select other)</label><span class="required">*</span>
+                            <select class="form-control" value="request.data.detail.deliveryadd" name="re" #re='ngModel' [(ngModel)]="request.data.detail.deliveryadd" required>
+                                <option [value]=item *ngFor="let item of mogcity">{{item}}</option>
+
+                            </select>
+                        </div>
+
+
+                        <div class="form-group row m-2" *ngIf="request.data.detail.deliveryadd == 'Others'">
+                            <label for="typeahead-basic">Delivery City</label><span class="required">*</span>
+                            <input id="typeahead-basic2" type="text" name="er" #er='ngModel' class="form-control" value="request.data.detail.deliverycityreason" [(ngModel)]="request.data.detail.deliverycityreason" pattern="[a-zA-Z]{1,}" required />
+                        </div>
+
+
+
+
+
+
+                        <div class="form-group m-2">
+                            <label for="typeahead-basic">Contact person name</label><span class="required">*</span>
+                            <input type="text" class="form-control" name="contactPerson1" #contactPerson1='ngModel' [(ngModel)]="request.data.detail.contactperson" pattern="[a-zA-Z\s]{3,30}" required />
+                            <div [hidden]="contactPerson1.valid || contactPerson1.pristine" class="alert alert-danger m-0 mt-2">Please fill valid details </div>
+                        </div>
+
+
+
+                        <div class="form-group m-2">
+                            <label for="typeahead-basic">Contact person email</label><span class="required">*</span>
+                            <input type="email" class="form-control" name="contactPersonemail1" #contactPersonemail1='ngModel' [(ngModel)]="request.data.detail.contactpersonemail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                            <div [hidden]="contactPersonemail1.valid || contactPersonemail1.pristine" class="alert alert-danger m-0 mt-2">Please fill valid email </div>
+
+                        </div>
+
+
+
+                        <div class="form-group m-2">
+                            <label for="typeahead-basic">Contact person phone no.</label><span class="required">*</span>
+                            <input type="text" class="form-control" name="contactPersonphone1" #contactPersonphone1='ngModel' [(ngModel)]="request.data.detail.contactpersonphone" pattern="[0-9]{7,10}" required>
+                            <div [hidden]="contactPersonphone1.valid || contactPersonphone1.pristine" class="alert alert-danger m-0 mt-2">Please fill valid phone no.</div>
+                        </div>
+
+                        <div class="form-group m-2">
+                            <label for="typeahead-basic">Storage Requirement</label><span class="required">*</span>
+                            <select class="form-control" value=Yes name="requirementsOfStorage1" #requirementsOfStorage1='ngModel' [(ngModel)]="request.data.detail.requirementsofstorage" required>
+                                <option value=Yes>Yes</option>
+                                <option value=No>No</option>
+
+
+                            </select>
+                        </div>
+                        <button type="button " class="m-2 float-right btn btn-outline-success" [disabled]="!f.form.valid" (click)="updateReq()">Update</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container #move *ngIf="type=='Vehicle Movement'">
+    <div class="row"></div>
+    <br>
+    <div class="row"></div>
+
+    <div class="row  mt-5 pt-2">
+        <div class="col-12 mb-2">
+            <button type="button" (click)="backClicked()" class="btn w-100 col-xs-2 btn-secondary text-center">
+                <span class="mt-4">
+                    <i class="fas fa-long-arrow-alt-left"></i>
+                </span>
+                <span class="mt-0"> Back</span>
+            </button>
+        </div>
+        <div class="col-12">
+            <div class="">
+                <h3 class="">Vehicle Movement</h3>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row" style="margin-top:5%;margin-bottom:10%">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        Booking Details
+                    </div>
+                    <form #f="ngForm">
+
+                        <div class="form-group m-2">
+                            <label for="exampleFormControlSelect1">Vehicle Type</label><span class="required">*</span>
+                            <select class="form-control" id="exampleFormControlSelect1" name="ghgf" #ghgf='ngModel' [(ngModel)]="vehicletype" required>
+                                <option value="Four Wheelers">Four Wheelers</option>
+                                <option value="Two Wheelers">Two Wheeler</option>
+
+                            </select>
+                        </div>
+
+                        <div class="form-group m-2">
+                            <label for="typeahead-basic"> Current Location</label><span class="required">*</span>
+                            <select class="form-control" value="depModel" name="ffd" #ffd='ngModel' [(ngModel)]="currentlocation" required>
+                                <option [value]="item" *ngFor="let item of movcity">{{item}} </option>
+
+                            </select>
+                        </div>
+
+                        <div class="form-group row m-2" *ngIf="request.data.detail.currentlocation == 'Others'">
+
+                            <input id="typeahead-basic1" type="text" name="er1" #er1='ngModel' value="request.data.detail.location" class="form-control" [(ngModel)]="othersmov" pattern="[a-zA-Z]{1,}" required />
+
+                        </div>
+
+
+
+
+                        <div class="form-group m-2">
+                            <label>Origination Address</label><span class="required">*</span>
+                            <textarea type="text" class="form-control" name="origination1" #origination1='ngModel' [(ngModel)]="origination" pattern="[a-zA-Z0-9\s]{1,}" required></textarea>
+                            <div [hidden]="origination1.valid || origination1.pristine" class="alert alert-danger m-0 mt-2">Please fill correct origin location </div>
+
+                        </div>
+
+                        <div class="form-group m-2">
+                            <label>Designation Address</label><span class="required">*</span>
+                            <textarea type="text" class="form-control" name="designation1" #designation1='ngModel' [(ngModel)]="destination" pattern="[a-zA-Z0-9\s]{1,}" required></textarea>
+                            <div [hidden]="designation1.valid || designation1.pristine" class="alert alert-danger m-0 mt-2">Please fill correct destination location</div>
+
+                        </div>
+
+
+
+                        <div class="form-group m-2">
+                            <label for="exampleInputEmail1">Date of Movement</label><span class="required">*</span>
+                            <input type="date" class="form-control" name="do" #do='ngModel' [(ngModel)]="dateofmovementmov" required />
+                        </div>
+
+
+                        <button type="button " class="m-2 float-right btn btn-outline-success" (click)="updateReq()">Update</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container #grievan *ngIf="type=='Grievances'">
+    <div class="row"></div>
+    <br>
+    <div class="row"></div>
+    <div class="row mt-5 pt-2">
+        <div class="col-12 mb-2">
+            <button type="button" (click)="backClicked()" class="btn w-100 col-xs-2 btn-secondary text-center">
+                <span class="mt-4">
+                    <i class="fas fa-long-arrow-alt-left"></i>
+                </span>
+                <span class="mt-0"> Back</span>
+            </button>
+        </div>
+        <div class="col-12">
+            <div class="">
+                <h3 class="">Grievances</h3>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="row" style="margin-top:5%;margin-bottom:10%">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        Lodge your Grievances
+                    </div>
+                    <form #f='ngForm'>
+
+                        <div class="form-group m-2">
+                            <label>Type</label><span class="required">*</span>
+                            <select class="form-control" [(ngModel)]="typeOfGrevience" name="typee" #typee='ngModel' required>
+                                <option value="Query">Query</option>
+                                <option value="Escalation">Escalation</option>
+                                <option value="Compalaint">Complaint</option>
+                                <option value="Others">Others</option>
+                            </select>
+                            <div [hidden]="typee.valid || typee.pristine" class="alert alert-danger m-2">Fill valid option </div>
+
+                        </div>
+
+                        <div class="form-group row m-2" *ngIf="request.data.detail.typesofgrievances=='Others'">
+                            <input id="typeahead-basic" type="text" name="dep2" #dep2='ngModel' class="form-control" [(ngModel)]="request.data.detail.natureofreason" pattern="[a-zA-Z\s]{1,80}" required/>
+
+                        </div>
+
+                        <div class="form-group m-2">
+                            <label>Nature of grievances</label><span class="required">*</span>
+                            <select class="form-control" [(ngModel)]="natureOfGreviance" name="sd" #sd='ngModel' required>
+                                <option value="Flight Booking">Flight Booking</option>
+                                <option value="Hotel Booking">Hotel Booking</option>
+                                <option value="Movements Booking">Goods Movement</option>
+                                <option value="Movements vehicles">Vehicle Movement</option>
+                                <option value="Expense Reimbursements">Expense Reimbursements</option>
+                                <option value="Cab booking">Cab booking</option>
+                                <option value="Others">Others</option>
+
+                            </select>
+                            <div [hidden]="sd.valid || sd.pristine" class="alert alert-danger m-2">Fill valid option
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="form-group row m-2" *ngIf="request.data.detail.natureofgrievances=='Others'">
+                            <input id="typeahead-basic" type="text" name="dep2" #dep2='ngModel' class="form-control" [(ngModel)]="request.data.detail.natureofreason1" pattern="[a-zA-Z\s]{1,80}" required/>
+
+                        </div>
+
+
+
+
+
+                        <div class="form-group m-2">
+                            <label>Description</label><span class="required">*</span>
+                            <textarea type="text" class="form-control" name="Description" #Description='ngModel' [(ngModel)]="descriptiongreviance" required>
+                  </textarea>
+                            <div [hidden]="Description.valid || Description.pristine" class="alert alert-danger m-0 mt-2">Fill valid details</div>
+
+                        </div>
+
+
+
+
+
+
+
+
+
+                        <div class="form-group m-2">
+
+                            <div class=" form-group input-group my-3  mr-4 ">
+
+                                <div class=" form-group input-group my-3  mr-4 ">
+                                    <p class="form-label-group "> Upload</p>
+                                    <input type="file" class="form-control-file" accept="image/*" (change)="handleInputChange($event)">
+                                </div>
+
+
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="alert alert-info m-2" role="alert">
+                            <h6><b>NOTE: </b> Please upload an image less than 100kb.</h6>
+                        </div>
+
+                        <img [src]="imgriveance" *ngIf="request.data.detail.photo" height="auto" width="50%" />
+
+
+                        <button type="button " class="m-2 float-right btn btn-outline-success" [disabled]="!f.form.valid" (click)="updateReq()">Update</button>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

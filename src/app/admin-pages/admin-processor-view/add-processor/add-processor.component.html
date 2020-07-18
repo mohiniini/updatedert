@@ -1,0 +1,68 @@
+<div class="row m-2 ">
+    <button type="button" (click)="backClicked()" class="btn  col-xs-2 btn-light"><i class="material-icons">
+            arrow_back
+          </i>
+        </button>
+</div>
+
+<div class="row ">
+    <div class="h3   font-weight-bold text-capitalize  ml-4">Add New Processor</div>
+</div>
+
+<div class="card">
+    <div class="card-body m-2">
+        <div class="row  justify-content-center">
+            <div class=" col-12 input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                </div>
+
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" (change)="fileupload($event)" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>
+                <!-- <div class="custom-file">
+                    <input type="file" (change)="fileupload($event)" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>-->
+            </div>
+            <div class="col-auto">
+                <button (click)="upload()" class="btn btn-outline-success">Save Upload</button>
+            </div>
+
+        </div>
+        <hr>
+
+
+
+        <form #f="ngForm">
+            <div class="form-group">
+                <label>Processor Name</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" name="processor.namee" #processor.namee='ngModel' [(ngModel)]="processor.name" pattern="[a-zA-Z\s]{1,}" required>
+            </div>
+
+
+
+
+
+            <div class="form-group">
+                <label>Email</label>
+                <!--<input type="text" class="form-control" id="exampleInputPassword1" name="processor.email" [formControl]="processor.email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required/>-->
+                <input type="email" class="form-control" id="oexampleInputPassword1" name="prcessor.emaill" #prcessor.emaill='ngModel' [(ngModel)]="processor.email" required>
+            </div>
+
+
+
+            <div class="form-group">
+                <label>Phone no </label>
+                <!--<input type="text" class="form-control" id="exampleInputPassword1" name="processor.phone" [formControl]="processor.phone" pattern="[0-9]{3,}" required>-->
+                <input type="text" class="form-control" id="exampleInputPassword1" name="processor.phonee" #processor.phonee='ngModel' [(ngModel)]="processor.phone" pattern="[6789][0-9]{9}" required>
+            </div>
+
+        </form>
+        <div class="row m-2 justify-content-end">
+            <div class="col-2 m-0 p-0 "><button class="btn w-100 btn-outline-success float-right" [disabled]="!f.form.valid" (click)="addProcessor(f)">Save</button></div>
+        </div>
+
+    </div>
+</div>

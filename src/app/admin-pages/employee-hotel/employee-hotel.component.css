@@ -1,0 +1,18 @@
+select{
+    font-size: 1rem;
+
+}
+.ichover:hover{
+    color: white;
+    background-color: darkorange;
+}
+.ichover{
+    color: darkorange;
+}
+.bg-lightGray{
+    background-color: #EAEAEA;
+}
+.border-modify{
+    border-style: solid;
+    border-color: #E3CD81;
+}

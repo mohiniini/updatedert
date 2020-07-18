@@ -1,0 +1,159 @@
+<ng-container *ngIf="showScreen">
+    <div class="row">
+    </div>
+    <br>
+    <div class="row"></div>
+    <div class="row  mt-5 pt-2">
+        <div class="col-12 mb-2">
+            <button type="button" (click)="backClicked()" class="btn w-100 col-xs-2 btn-secondary text-center">
+                <span class="mt-4">
+                    <i class="fas fa-long-arrow-alt-left"></i>
+                </span>
+                <span class="mt-"> Back</span>
+            </button>
+        </div>
+
+        <div class="">
+            <h3 class="mt-3 ml-4">Goods Movement</h3>
+        </div>
+
+
+    </div>
+
+
+    <ng-template #elseTemplate>
+        <div class="row" style="margin-top:5%;margin-bottom:10%">
+            <div class="col-12">
+                <div class="card border-0">
+                    <div class="card-body">
+                        <div class="card-title">
+
+                            <div class="alert alert-danger text-center" role="alert">
+                                sorry you have exhausted the request limit for this service
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+
+
+    <div class="row" *ngIf="mogShow; else elseTemplate" style="margin-top:5%;margin-bottom:10%">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <b>Booking Details</b>
+                    </div>
+
+
+                    <!--<div class="form-group m-2">
+                        <label>Date of movement</label>
+                        <br />
+                        <ngb-datepicker #dp [(ngModel)]="model" (navigate)="date = $event.next"></ngb-datepicker>
+    
+    
+                    </div>-->
+                    <form #f="ngForm">
+
+                        <!--<div class="col-12 pl-0 ml-0">
+                            <div class="input-group input-group-lg">
+                                <input class="form-control" placeholder="dd-mm-yyyy" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary calendar my-0  pt-2 py-1" (click)="d.toggle()" type="button"><i class="material-icons p-0 m-0">
+                                calendar_today
+                          </i></button>
+    
+                                </div>
+                            </div>
+                        </div>-->
+
+                        <div class="form-group m-2">
+                            <label for="exampleInputEmail1">Date of Movement</label><span class="required">*</span>
+                            <input type="date" class="form-control" (change)="changeDate1(do.value)" name="do" #do='ngModel' [(ngModel)]="model" [ngStyle]="{'border-left':dateValidation(do.value) ? '5px solid #42A948' : '5px solid #a94442' }" required/>
+                        </div>
+
+
+                        <div class="form-group m-2">
+                            <label for="typeahead-basic">Pickup city (if not listed, please select other)</label><span class="required">*</span>
+                            <select class="form-control" name="dcd" value="pickUpCity" #dcd='ngModel' [(ngModel)]="pickUpCity" required>
+                            <option [value]=item *ngFor="let item of city">{{item}}</option>
+    
+                            </select>
+                        </div>
+
+                        <div class="form-group row m-2" *ngIf="pickUpCity == 'Others'">
+                            <input id="typeahead-basic1" type="text" name="er1" #er1='ngModel' class="form-control" [(ngModel)]="pickupcityReason" pattern="[a-zA-Z0-9\s]{1,}" required/>
+                        </div>
+
+
+
+                        <div class="form-group m-2">
+                            <label for="typeahead-basic">Delivery City (if not listed, please select other)</label><span class="required">*</span>
+                            <select class="form-control" value="deliveryAdd" name="re" #re='ngModel' [(ngModel)]="deliveryAdd" required>
+                  <option [value]=item *ngFor="let item of city1" >{{item}}</option>
+                  
+                </select>
+                        </div>
+
+
+                        <div class="form-group row m-2" *ngIf="deliveryAdd == 'Others'">
+                            <input id="typeahead-basic2" type="text" name="er" #er='ngModel' class="form-control" [(ngModel)]="deliverycityReason" pattern="[a-zA-Z0-9\s]{1,}" required/>
+                        </div>
+
+
+
+                        <!-- <div class="form-group m-2">
+                        <label>Complete pickup address</label>
+                        <textarea type="textarea" class="form-control" name="pickUpAdd" [formControl]="pickUpAdd" pattern="[a-zA-Z]{3,}" required>
+                </textarea>
+                    </div>
+                    <div class="form-group m-2">
+                        <label>Complete delivery address</label>
+                        <textarea type="text" class="form-control" name="deliveryAdd" [formControl]="deliveryAdd" pattern="[a-zA-Z]{3,}" required>
+                  </textarea>
+                    </div> -->
+
+
+                        <div class="form-group m-2">
+                            <label for="typeahead-basic">Contact person name</label><span class="required">*</span>
+                            <input type="text" class="form-control" name="contactPerson1" #contactPerson1='ngModel' [(ngModel)]="contactPerson" pattern="[a-zA-Z\s]{3,30}" required />
+                            <div [hidden]="contactPerson1.valid || contactPerson1.pristine" class="alert alert-danger m-0 mt-2">Please fill valid details </div>
+                        </div>
+
+
+
+                        <div class="form-group m-2">
+                            <label for="typeahead-basic">Contact person email</label><span class="required">*</span>
+                            <input type="email" class="form-control" name="contactPersonemail1" #contactPersonemail1='ngModel' [(ngModel)]="contactPersonemail" required>
+                            <div [hidden]="contactPersonemail1.valid || contactPersonemail1.pristine" class="alert alert-danger m-0 mt-2">Please fill valid email </div>
+                        </div>
+
+
+
+                        <div class="form-group m-2">
+                            <label for="typeahead-basic">Contact person phone no.</label><span class="required">*</span>
+                            <input type="text" class="form-control" name="contactPersonphone1" #contactPersonphone1='ngModel' [(ngModel)]="contactPersonphone" pattern="[6789][0-9]{9}" required>
+                            <div [hidden]="contactPersonphone1.valid || contactPersonphone1.pristine" class="alert alert-danger m-0 mt-2">Please fill valid phone no.</div>
+                        </div>
+
+                        <div class="form-group m-2">
+                            <label for="typeahead-basic">Storage Requirement</label><span class="required">*</span>
+                            <select class="form-control" value=Yes name="requirementsOfStorage1" #requirementsOfStorage1='ngModel' [(ngModel)]="requirementsOfStorage" required>
+                <option value=Yes >Yes</option>
+                <option value=No >No</option>
+                
+    
+              </select>
+                        </div>
+                        <button type="button " class="m-2 float-right btn btn-outline-success" [disabled]="!f.form.valid||!dateValidation(do.value)" (click)="saveRequest(f)">Save</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

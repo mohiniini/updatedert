@@ -1,0 +1,119 @@
+<div class="row m-2 ">
+    <button type="button" (click)="backClicked()" class="btn  col-xs-2 btn-light"><i class="material-icons">
+            arrow_back
+        </i>
+    </button>
+</div>
+<!-- <div class="container"> -->
+<div class="row align-items-end">
+    <div class="h3   font-weight-bold text-capitalize    col-auto">
+        Processor
+    </div>
+    <div class=" float-right col ">
+        <p class="text-right mb-0">
+            <a class="m-3" [routerLink]="['../addProcessor']"><i class="fas fa-user-plus fa-2x   "></i></a>
+
+        </p>
+
+
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-12">
+        <div class="card w-100">
+            <div class="card-body shadow-lg mt-0">
+                <div class="row mt-0 justify-content-between">
+            <div class="col-3">
+                <div class="form-group row">
+                    <label class="d-flex align-items-center col-auto pt-1 ml-1">Records</label>
+                    <select class="form-control col-3 d-inline-block" id="exampleFormControlSelect1" [(ngModel)]="pageSize">
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="15">15</option>
+                      <option value="20">20</option>
+                      <option value="25">25</option>
+                    </select>
+                  </div>
+            </div>
+                    <div class="col-3 mt-0 mb-1">
+                        <input class="form-control" #searching type="text" placeholder="Search"
+                            (keyup)="Searchfilter(searching.value)">
+                    </div>
+                </div>
+                <div class="row m-1">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">S.No</th>
+                                    <th scope="col">Full Name</th>
+                                    <th scope="col">Processor ID</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Phone no</th>
+                                    <th scope="col">Employees</th>
+                                    <th></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of displayProcessor| slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;let i=index">
+                                    <th scope="row">{{i}}</th>
+                                    <td>{{item.data.name}}</td>
+                                    <td>{{item.data.processor_Unique_Id}}</td>
+                                    <td>{{item.data.email}}</td>
+                                    <td>{{item.data.phone}}</td>
+                                    <td><a [routerLink]="['../ViewDetailsProcessor',item._id]">view</a></td>
+                                    <td><button class="btn btn-outline-danger" (click)="softDelete(item._id)"><i class="fas fa-trash-alt   "></i></button></td>
+
+                                    <!-- <td><a [routerLink]="['../view',item._id]">view</a></td> -->
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between p-2">
+                    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" [maxSize]="5" [boundaryLinks]="true">
+                    </ngb-pagination>
+                    Total:{{collectionSize}}
+
+                    <!-- <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">S.No</th>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">phone</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Detail</th>
+                        <th scope="col">processor</th>
+                        <th scope="col"></th>
+    
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of employees;let i=index">
+                        <th scope="row">{{i}}</th>
+                        <td>{{item.Person_Full_Name_First_Last}}</td>
+                        <td>{{item.Person_Start_Date}}</td>
+                        <td>{{item.Person_Email_Address}}</td>
+                        <td>{{item.Person_phone_no}}</td>
+                        <td>{{item.Status}}</td>
+                        <td><a [routerLink]="['../ViewDetailsProcessor',i+1]">view</a></td>
+                        <td><select class="custom-select custom-select-lg mb-3  d-block">
+                          <option selected>select processor</option>
+                          <option value="1">processor 1</option>
+                          <option value="2">processor 2</option>
+                          <option value="3">processor 3</option>
+                        </select></td>
+                        <td><a href=""><i class="fas fa-check"></i></a></td>
+                      </tr>
+                    </tbody>
+                  </table> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

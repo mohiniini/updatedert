@@ -1,0 +1,225 @@
+<div class="row m-2 ">
+    <button type="button" (click)="backClicked()" class="btn  col-xs-2 btn-light"><i class="material-icons">
+            arrow_back
+        </i>
+    </button>
+</div>
+
+
+
+<div class="row">
+    <div class="col  ">
+        <div class="h3   font-weight-bold text-capitalize   text-center">Flight Booking Details</div>
+
+    </div>
+    <div class="col" *ngIf="request.data.qoutation">
+        <div class="h3   font-weight-bold text-capitalize   text-center">Quotation Details</div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col border-right">
+        <div class="card-body">
+            <div class="">Name : {{request.data.name}}</div>
+            <div class=""> Date of Journey : {{request.data.detail.dot}}
+            </div>
+            <div class="">Arrival Location : {{request.data.detail.arr}}</div>
+            <div class="">Departure Location: {{request.data.detail.dep}}</div>
+            <div class="">Request ID : {{request.data.requestkey}}</div>
+            <div class="">Type : {{request.data.type}}</div>
+            <div class="" *ngIf="request.data.npeople>0">No of People: {{request.data.npeople}}</div>
+            <div class="" *ngIf="request.data.npeople==0&&(request.data.type=='Flight Booking'||request.data.type=='Hotel Booking')">
+                No of People: 1(self)</div>
+            <div class="" *ngIf="request.data.guests.length>0">Guests: <span class="" *ngFor="let itr of request.data.guests;let last=last">{{itr.item_text}}{{last?"":", "}}</span>
+            </div>
+
+            <div class="">
+                Date of Booking: {{request.data.detail.date| date:"MM/dd/yyy"}}
+
+            </div>
+            <div class="">
+                Time of Journey: {{request.data.detail.tot.hour}}:{{request.data.detail.tot.minute}}
+
+            </div>
+            <div class="">Meal: {{request.data.detail.meal}}</div>
+
+
+        </div>
+    </div>
+    <div class="col" *ngIf="request.data.qoutation">
+        <div class="card-body">
+
+            <div class=""> Time: {{request.data.qoutation.time}}
+            </div>
+            <div class="">Origination : {{request.data.qoutation.origination}}</div>
+            <div class="">Destination : {{request.data.qoutation.destionation}}</div>
+            <div class="">Airline prefrence : {{request.data.qoutation.airline}}</div>
+            <div class="">Price : Rs. {{request.data.qoutation.price}}</div>
+
+        </div>
+    </div>
+</div>
+<!-- <div class="row mt-4 justify-content-center ">
+      <div id="collapseExample" class="collapse card-cody bg-light  rounded">
+        <figure class="figure">
+          <img src="bill (1).png" class="figure-img img-fluid rounded" alt="...">
+          
+        </figure>
+      </div>
+
+    </div> -->
+
+<div class="row my-4 justify-content-center align-items-center" [hidden]="hiddenvalue">
+    <div class="card w-100">
+        <div class="card-body">
+
+            <div class="row">
+                <h2 class="card-title col-12">Quotation Details</h2>
+                <div class="col-12" *ngIf="!request.data.orderConfirmed">
+                    <div class="row m-3 align-items-center">
+                        <div class="mr-3">Confirm the order</div>
+                        <button class="btn btn-success mr-3" (click)="AcceptTheOrder()">Accept</button>
+                        <button class="btn btn-danger" (click)="DeclineTheOrder()">Decline</button>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <form #f="ngForm" class="mt-4" *ngIf="request.data.sendQuotation=='waiting'">
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Airline</label><span class="required">*</span>
+                    <select class="form-control" name="Airline" name="air" #air='ngModel' [(ngModel)]="airline" required>
+                        <option>Air india</option>
+                        <option>Indigo</option>
+                        <option>Jet</option>
+                        <option>Spice</option>
+
+                    </select>
+                </div>
+                <!-- <div class="form-group">
+                        <label>Prefered Date of Travel</label>
+                        <br />
+                        <ngb-datepicker #dp [(ngModel)]="model" [ngModelOptions]="{standalone: true}" (navigate)="date = $event.next"></ngb-datepicker>
+
+                        <hr />
+                    </div>-->
+                <div class="form-group row m-2">
+                    <label for="exampleInputEmail1">Date of Travel</label><span class="required">*</span>
+                    <input type="date" class="form-control" (change)=" checkvalue(do.value)" name="do" #do='ngModel' [(ngModel)]="model" required/>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Time</label><span class="required">*</span>
+                    <input type="time" class="form-control" placeholder="Enter departure timming" name=time [(ngModel)]="FlightQuotation.time" required>
+                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Origination</label><span class="required">*</span>
+                    <select class="form-control" name="origin" #origin='ngModel' placeholder="Enter the arrival airport" [(ngModel)]="origination" pattern="[a-zA-Z\s]{1,}" required>
+                        <option [value]=item *ngFor="let item of city" [disabled]="destionation==item">{{item}}
+                        </option>
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Destination</label><span class="required">*</span>
+                    <select class="form-control" name="des" #des='ngModel' placeholder="Enter the destination airport" [(ngModel)]="destionation" pattern="[a-zA-Z\s]{1,}" required>
+                        <option [value]=item *ngFor="let item of city1" [disabled]="origination==item">{{item}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Price</label><span class="required">*</span>
+                    <input type="text" class="form-control" name="des1" #des1='ngModel' placeholder="Enter the price" [(ngModel)]="price" pattern="[0-9]{1,}" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Remarks</label><span class="required">*</span>
+                    <textarea class="form-control" rows="3" name="rem" #rem='ngModel' [(ngModel)]="formRemark.message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" [disabled]="!f.form.valid || !dateValidation(do.value)" (click)="sendTheQuotation(f)">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row mt-4 justify-content-center   " *ngIf="request.data.remark">
+    <div class="col-10 ">
+        <div class="card-body rounded bg-secondary " style="height: 25rem;overflow-x: hidden;overflow-x:auto;text-align:justify;  ">
+
+
+            <div *ngFor="let remarksitem of request.data.remark">
+                <div [ngSwitch]="remarksitem.role">
+                    <div class="textBody " *ngSwitchCase="'vendor'">
+                        <!-- <i class="fas fa-store fa-2x"></i> -->
+                        <p>{{remarksitem.message}}</p>
+                        <span class="time-right"> [{{remarksitem.time  | date:"HH:mm a"}}]
+                            {{remarksitem.time| date: 'dd/MM/yyyy'}}</span>
+                    </div>
+                    <div class="textBody blueradmin " *ngSwitchCase="'admin'">
+                        <i class="fas fa-user-shield right"></i>
+                        <p>{{remarksitem.message}}</p>
+                        <span class="time-right"> [{{remarksitem.time  | date:"HH:mm a"}}]
+                            {{remarksitem.time| date: 'dd/MM/yyyy'}}</span>
+                    </div>
+
+                    <div class="textBody darker" *ngSwitchCase="'processor'">
+                        <i class="fas fa-user-tie right"></i>
+                        <p>{{remarksitem.message}}</p>
+                        <span class="time-right"> [{{remarksitem.time  | date:"HH:mm a"}}]
+                            {{remarksitem.time| date: 'dd/MM/yyyy'}}</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+</div>
+
+<div class="row my-4 justify-content-center align-items-center" *ngIf="request.data.qoutation ">
+    <div class="col-6">
+        <label>Remarks </label>
+        <textarea class="form-control" cols="30" rows="5" [(ngModel)]="seprateremark.message"></textarea>
+    </div>
+    <div class="col-2 ">
+        <button class="btn btn-outline-success w-100 " (click)="postremark()">Post</button>
+    </div>
+</div>
+<div class="row my-4 " *ngIf="request.data.pwcconfirmation">
+
+    <div class="col-12" *ngIf="modificationBlocked;else elseTemplate">
+        <div class="row">
+            <div class="input-group mb-3 col-12">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01">Upload the ticket</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" accept="image/*" (change)="handleInputChange($event)" required>
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>
+            </div>
+            <div class=" col-2">
+                <button class="btn btn-outline-success w-100 float-center " (click)="sendTheVoucher() ">Send</button>
+
+            </div>
+            <div class=" col-2" *ngIf="request.data.status!=='green'">
+                <button class="btn btn-outline-danger w-100 float-center " (click)="decline()">Decline</button>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<ng-template #elseTemplate>
+    <div class="col-12">
+        <div class="alert alert-warning" role="alert">
+            Kindly wait as the Modified Booking details are being reviewed.
+        </div>
+    </div>
+</ng-template>

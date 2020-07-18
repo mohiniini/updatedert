@@ -1,0 +1,40 @@
+click outside:
+<button type="button" class="btn btn-outline-secondary" triggers="click" [autoClose]="'outside'"
+  ngbTooltip="Click outside or press Escape to close">
+  Click to toggle
+</button>
+
+<!-- ===================================================================== -->
+
+<th scope="col">Reject</th>
+
+
+<span [ngSwitch]="item.data.status">
+  <i *ngSwitchCase="'red'" class="fas fa-circle text-danger" triggers="click" [autoClose]="true"
+    ngbTooltip="vendor yet to  assign"></i>
+  <i *ngSwitchCase="'green'" class="fas fa-circle text-success" triggers="click" [autoClose]="true"
+    ngbTooltip="request successfull"></i>
+  <i *ngSwitchCase="'cancel'" class="fas fa-window-close text-danger" triggers="click" [autoClose]="true"
+    ngbTooltip="request  cancelled"></i>
+  <i *ngSwitchCase="'rejected'" class="far fa-times-circle " style="color: darkorange;" triggers="click"
+    [autoClose]="true" ngbTooltip="request Rejected"></i>
+  <i *ngSwitchCase="'yellow'" class="fas fa-circle text-warning" triggers="click" [autoClose]="true"
+    ngbTooltip="request processing"> </i>
+</span>
+
+
+<td>
+  <button *ngIf="(!item.data.assignVendor)&&!((item.data.status=='cancel')||(item.data.status=='rejected'))"
+      class="btn btn-outline-primary border-white"
+      (click)="save(item,item._id)"><i class="fas fa-check"></i></button>
+
+  <button *ngIf="item.data.assignVendor&&!((item.data.status=='cancel')||(item.data.status=='rejected'))"
+      class="btn btn-outline-success border-white"
+      (click)="save(item,item._id)"><i class="fas fa-check"></i></button>
+</td>
+<td>
+  <button  *ngIf="!((item.data.status=='cancel')||(item.data.status=='rejected'))" class="btn border-white  btn-outline-orange" (click)="rejectRequest(item,item._id)">
+      <i class="fas fa-times p-0" ></i>
+  </button>
+
+</td> 

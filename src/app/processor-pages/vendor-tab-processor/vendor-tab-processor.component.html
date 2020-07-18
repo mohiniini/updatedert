@@ -1,0 +1,78 @@
+<div class="row align-items-end">
+    <div class=" pt-3 ml-1 mt-3">
+        <button type="button" (click)="backClicked()" class="btn  col-xs-2 btn-light"><i class="material-icons">
+                                                arrow_back
+                                            </i>
+                                        </button>
+    </div>
+
+    <div class="h3  font-weight-bold text-capitalize  col-auto mt-3">
+        Vendor
+    </div>
+
+</div>
+
+<div class="row my-3">
+    <div class="col-12">
+        <div class="card w-100">
+            <div class="card-body shadow-lg">
+                <div class="row mt-0 justify-content-between">
+                    <div class="col-3">
+                        <div class="form-group row">
+                            <label class="d-flex align-items-center col-auto pt-1 ml-1">Records</label>
+                            <select class="form-control col-3 d-inline-block" id="exampleFormControlSelect1" [(ngModel)]="pageSize">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="25">25</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3 mt-0 mb-1">
+                        <input class="form-control" #searching type="text" placeholder="Search" (keyup)="Searchfilter(searching.value)">
+                    </div>
+                </div>
+
+                <div class="row m-1">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">S.No</th>
+                                    <th scope="col">Company Name</th>
+                                    <th scope="col">Domain</th>
+                                    <th scope="col">Address</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Phone</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of displayVendor| slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;let i=index">
+                                    <th scope="row">{{i+1}}</th>
+                                    <td>{{item.data.name}}</td>
+                                    <td><span *ngFor="let domain of item.data.domain;let last=last">{{domain.Domain_name}}{{last?"":", "}}</span>
+                                    </td>
+                                    <td>{{item.data.address}}</td>
+                                    <td>{{item.data.email}}</td>
+                                    <td>{{item.data.phone_no}}</td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between p-2">
+                    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+                    </ngb-pagination>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

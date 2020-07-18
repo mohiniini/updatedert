@@ -1,0 +1,192 @@
+<div class="container border-light border" *ngIf="request">
+    <div class="row">
+        <div class=" pt-3 ml-2">
+            <button type="button" (click)="backClicked()" class="btn  col-xs-2 btn-light"><i class="material-icons">
+                                            arrow_back
+                                        </i>
+                                    </button>
+        </div>
+        <div class="col  ">
+
+        </div>
+        <div class="col" *ngIf="request.data.qoutation">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col border-right">
+            <div class="card-body ">
+                <div class="h3  font-weight-bold text-capitalize   text-center mt-3">Cab Booking Detail</div>
+
+                <div>Name: {{request.data.name}}</div>
+                <div> Date of Journey:
+                    <!--{{request.data.detail.dot.day}}/{{request.data.detail.dot.month}}/{{request.data.detail.dot.year}}-->
+                    Date of Journey: {{request.data.detail.dot| date:"MM/dd/yyy"}}
+
+                </div>
+                <div>Arrival: {{request.data.detail.arr}}</div>
+                <div>Departure: {{request.data.detail.dep}}</div>
+                <div>Request ID: {{request.data.requestkey}}</div>
+
+                <div *ngIf="request.data.npeople>0">No of People: {{request.data.npeople}} </div>
+
+                <div
+                    *ngIf="request.data.npeople==0&&(request.data.type=='Flight Booking'||request.data.type=='Hotel Booking')">
+                    No of People: 1(self)</div>
+
+
+                <div *ngIf="request.data.guests.length>0">Guests: <span
+                        *ngFor="let itr of request.data.guests;let last=last">{{itr.item_text}}{{last?"":", "}}</span>
+                </div>
+
+                <div>
+                    Date of Booking: {{request.data.detail.date| date:"MM/dd/yyy"}}
+
+                </div>
+                <div>Time of Journey: {{request.data.detail.tot.hour}}:{{request.data.detail.tot.minute}}
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col border-right" *ngIf="request.data.qoutation">
+            <div class="card-body">
+                <div class="h3   font-weight-bold text-capitalize mt-3  text-center">Quotation details</div>
+
+                <div class="lead"> Date of Journey: {{request.data.qoutation.day}}
+                </div>
+                <div class="lead"> Time: {{request.data.qoutation.time.hour}}:{{request.data.qoutation.time.minute}}
+                </div>
+                <div class="lead">Origination: {{request.data.qoutation.origination}}</div>
+                <div class="lead">Destination: {{request.data.qoutation.destionation}}</div>
+                <div class="lead">Car prefrence: {{request.data.qoutation.airline}}</div>
+                <div class="lead">Price : Rs. {{request.data.qoutation.price}}</div>
+
+                <div class="row mt-4 justify-content-end">
+                    <div class="col-4" *ngIf="qoutationToggle && !exceptionToggle&&AcceptDeclineToogle">
+                        <button class="btn btn-outline-danger mt-2  w-100" (click)="decline()">decline</button>
+                    </div>
+                    <div class="col-4" *ngIf="qoutationToggle && !exceptionToggle &&AcceptDeclineToogle">
+                        <button class="btn btn-outline-success mt-2 w-100" (click)="AcceptTheOrder()">accept</button>
+                    </div>
+                    <div class="col-4" *ngIf="qoutationToggle && !exceptionToggle &&AcceptDeclineToogle">
+                        <button class="btn btn-outline-info mt-2 w-100" (click)="exception()" >exception</button>
+                    </div>
+                    <div class="col-12 mt-2" *ngIf="request.data.pwcconfirmation">
+                        <div class="alert alert-success" role="alert">
+                            Quotation Accepted
+                        </div>
+                    </div>
+                    <div class="col-12 mt-2" *ngIf="exceptionAlert&&!request.data.pwcconfirmation">
+                        <div class="alert alert-info" role="alert">
+                            exception has been raised
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col border-right" *ngIf="request.data.modifiedData">
+            <div class="card-body ">
+                <div class="h3   font-weight-bold text-capitalize mt-3  text-center">modified Request</div>
+
+                <div>Name: {{request.data.name}}</div>
+                <div> Date of Journey:
+                    <!--{{request.data.detail.dot.day}}/{{request.data.detail.dot.month}}/{{request.data.detail.dot.year}}-->
+                    Date of Journey: {{request.data.modifiedData.dot| date:"MM/dd/yyy"}}
+
+                </div>
+                <div>Arrival: {{request.data.modifiedData.arr}}</div>
+                <div>Departure: {{request.data.modifiedData.dep}}</div>
+                <div>Request ID: {{request.data.requestkey}}</div>
+
+                <div *ngIf="request.data.modifiedData.npeople>0">No of People: {{request.data.npeople}} </div>
+
+                <div
+                    *ngIf="request.data.modifiedData.npeople==0&&(request.data.type=='Flight Booking'||request.data.type=='Hotel Booking')">
+                    No of People: 1(self)</div>
+
+
+                <div *ngIf="request.data.modifiedData.guest.length>0">Guests: <span
+                        *ngFor="let itr of request.data.modifiedData.guest;let last=last">{{itr.item_text}}{{last?"":", "}}</span>
+                </div>
+
+                <div>
+                    Date of Booking: {{request.data.detail.date| date:"MM/dd/yyy"}}
+
+                </div>
+                <div>Time of Journey:
+                    {{request.data.modifiedData.tot.hour}}:{{request.data.modifiedData.tot.minute}}
+                </div>
+                <div class="row mt-4">
+                    <div class="col-6"><button class="btn btn-outline-danger mt-2  w-100 text-capitalize"
+                            (click)="declineModification()">decline modification</button></div>
+                    <div class="col-6"><button class="btn btn-outline-success mt-2 w-100 text-capitalize"
+                            (click)="AcceptModification()">accept modification</button></div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row mt-4 justify-content-center " *ngIf="request.data.voucher">
+        <div id="collapseExample" class="collapse card-cody bg-light  rounded">
+            <figure class="figure">
+                <img [src]="request.data.voucher" class="figure-img img-fluid rounded" *ngIf="request.data.voucher
+" style="max-width:300px;max-height:300px" />
+
+            </figure>
+            <div class="col-12">
+                <button class="btn btn-outline-dark" (click)="sendVoucher()">send Voucher</button>
+            </div>
+        </div>
+
+    </div>
+    <div class="row mt-4 justify-content-center   " *ngIf="request.data.remark">
+        <div class="col-10 ">
+            <div class="card-body rounded bg-secondary " style="width:918px;height: 442px;overflow-x: hidden;overflow-x:auto;text-align:justify;  ">
+
+
+                <div *ngFor="let remarksitem of request.data.remark">
+                    <div [ngSwitch]="remarksitem.role">
+                        <div class="textBody " *ngSwitchCase="'vendor'">
+                            <!-- <i class="fas fa-store fa-2x"></i> -->
+                            <p>{{remarksitem.message}}</p>
+                            <span class="time-right"> [{{remarksitem.time  | date:"HH:mm a"}}] {{remarksitem.time| date: 'dd/MM/yyyy'}}</span>
+                        </div>
+                        <div class="textBody blueradmin " *ngSwitchCase="'admin'">
+                            <i class="fas fa-user-shield right"></i>
+                            <p>{{remarksitem.message}}</p>
+                            <span class="time-right"> [{{remarksitem.time  | date:"HH:mm a"}}] {{remarksitem.time| date: 'dd/MM/yyyy'}}</span>
+                        </div>
+
+                        <div class="textBody darker" *ngSwitchCase="'processor'">
+                            <i class="fas fa-user-tie right"></i>
+                            <p>{{remarksitem.message}}</p>
+                            <span class="time-right"> [{{remarksitem.time  | date:"HH:mm a"}}] {{remarksitem.time| date: 'dd/MM/yyyy'}}</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row my-4 justify-content-center align-items-center" *ngIf="request.data.remark">
+        <div class="col-6">
+            <label>Remarks </label>
+            <textarea class="form-control" cols="30" rows="5" [(ngModel)]="seprateremark.message"></textarea>
+        </div>
+        <div class="col-2 ">
+            <button class="btn btn-outline-success w-100 " (click)="postremark()">Post</button>
+            <button class="btn btn-outline-danger mt-2  w-100" (click)="decline()">Decline</button>
+        </div>
+    </div>
+
+</div>

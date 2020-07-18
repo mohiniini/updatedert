@@ -1,0 +1,130 @@
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+  <div class="sidebar-sticky" *ngIf="roleId=='admin'">
+
+
+    <div class="sidebar-heading  d-flex  align-items-start px-2 mt-2  mb-1 text-muted">
+      <span class="font-weight-bold" style="font-size: 1rem;">Users</span>
+      
+    </div>
+    <ul class="navbar-nav flex-column mb-2">
+
+      <li class="nav-item licustom " *ngFor="let item of menuUsers;let i =index ;" [class.active]="clicked === item"
+        [routerLink]="item.path" (click)="clicked = (clicked === item ? null :item) ">
+
+        <!-- <hr *ngIf="i==0"> -->
+
+        <a class="nav-link m-2 " style="font-size: 0.8rem;">
+
+          <span data-feather="file-text">{{item.title}}</span>
+
+        </a>
+        <!-- <hr> -->
+      </li>
+
+
+
+    </ul>
+    <div class="sidebar-heading d-flex  align-items-start px-2 mt-4 mb-1 text-muted">
+      <span class="font-weight-bold" style="font-size: 1rem;">Requests</span>
+      
+    </div>
+    <ul class="navbar-nav flex-column mb-2">
+
+      <li class="nav-item licustom " *ngFor="let item of menuRequests;let i =index ;" [class.active]="clicked === item"
+        [routerLink]="item.path" (click)="clicked = (clicked === item ? null :item) ">
+
+        <!-- <hr *ngIf="i==0"> -->
+
+        <a class="nav-link m-2" style="font-size: 0.8rem;">
+
+          <span data-feather="file-text">{{item.title}}</span>
+
+        </a>
+        <!-- <hr> -->
+      </li>
+
+
+
+    </ul>
+  </div>
+  <div class="sidebar-sticky" *ngIf="roleId=='vendor'">
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>Requests</span>
+      <a class="d-flex align-items-center text-muted" href="#">
+        <span data-feather="plus-circle"></span>
+      </a>
+    </h6>
+    <ul class="navbar-nav flex-column mb-2">
+
+      <li class="nav-item licustom " *ngFor="let item of menuVendorRequest;let i =index ;"
+        [class.active]="clicked === item" [routerLink]="item.path" (click)="clicked = (clicked === item ? null :item) ">
+
+        <!-- <hr *ngIf="i==0"> -->
+
+        <a class="nav-link m-2">
+
+          <span data-feather="file-text">{{item.title}}</span>
+
+
+        </a>
+        <!-- <hr> -->
+      </li>
+
+
+
+    </ul>
+  </div>
+  <div class="sidebar-sticky" *ngIf="roleId=='processor'">
+
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-2 mt-2 mb-1 text-muted">
+      <span class="font-weight-bold" style="font-size: 1rem;">Users</span>
+      <a class="d-flex align-items-center text-muted" href="#">
+        <span data-feather="plus-circle"></span>
+      </a>
+    </h6>
+    <ul class="navbar-nav flex-column mb-2">
+
+      <li class="nav-item licustom " *ngFor="let item of menuProcessorUsers;let i =index ;"
+        [class.active]="clicked === item" [routerLink]="item.path" (click)="clicked = (clicked === item ? null :item) ">
+
+        <!-- <hr *ngIf="i==0"> -->
+
+        <a class="nav-link m-2" style="font-size: 0.8rem;">
+
+          <span data-feather="file-text">{{item.title}}</span>
+
+        </a>
+        <!-- <hr> -->
+      </li>
+
+
+
+    </ul>
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-2 mt-2 mb-1 text-muted">
+      <span class="font-weight-bold" style="font-size: 1rem;" >Requests</span>
+      <a class="d-flex align-items-center text-muted" href="#">
+        <span data-feather="plus-circle"></span>
+      </a>
+    </h6>
+    <ul class="navbar-nav flex-column mb-2">
+
+      <li class="nav-item licustom " *ngFor="let item of menuProcessorRequests;let i =index ;"
+        [class.active]="clicked === item" [routerLink]="item.path" (click)="clicked = (clicked === item ? null :item) ">
+
+        <!-- <hr *ngIf="i==0"> -->
+
+        <a class="nav-link m-2 " style="font-size: 0.8rem;">
+
+          <span data-feather="file-text">{{item.title}}</span>
+
+        </a>
+        <!-- <hr> -->
+      </li>
+
+
+
+    </ul>
+  </div>
+</nav>

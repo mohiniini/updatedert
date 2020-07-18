@@ -1,0 +1,80 @@
+<!-- user dependency details -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="h4 ml-3" *ngIf="dependencyheading">
+            Dependent Details
+        </div>
+        <br />
+        <div class="col-12  mb-5" *ngIf="dependencybody">
+            <div class="table-responsive">
+                <table class="table ">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">DOB</th>
+                            <th scope="col">Relationship</th>
+                            <th scope="col">Gender</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr scope="row" *ngFor="let item of employee.guests">
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.dob }}</td>
+                            <td>{{ item.relation }}</td>
+                            <td>{{ item.gender }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- user detail -->
+<!-- <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <div class="card-title">My Data</div>
+            </div>
+            <div class="col">
+              <i
+                class="material-icons"
+                style="margin-left:80%"
+                (click)="moreDetail()"
+                *ngIf="!details"
+              >
+                add
+              </i>
+  
+              <i
+                class="material-icons"
+                style="margin-left:80%"
+                (click)="moreDetail()"
+                *ngIf="details"
+              >
+                maximize
+              </i>
+            </div>
+          </div>
+  
+          <div *ngIf="details">
+            <div class="form-group" *ngFor="let item of employee | keyvalue">
+              <label class="text-muted" *ngIf="item.key != 'guests'">{{
+                item.key
+              }}</label>
+  
+              <div>
+                <b class="form-control" readonly *ngIf="item.key != 'guests'">{{
+                  item.value
+                }}</b>
+              </div>
+            </div>
+          </div>
+  
+          <div></div>
+        </div>
+      </div>
+    </div>
+  </div> -->

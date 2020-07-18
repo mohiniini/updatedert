@@ -1,0 +1,475 @@
+<!-- <div class="row">
+    <div class="col-lg-12"> -->
+
+<!-- <form>
+                    <div class="form-group form-inline">
+                        Full text search:
+                         <input class="form-control ml-2" type="text" [formControl]="filter" />
+                    </div>
+                  </form> -->
+<!-- <table class="table table-striped">
+                    <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Unique Request ID</th>
+                      <th scope="col">type</th>
+                      <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of requestData$ | async ; index as i">
+                      <th scope="row">{{ i + 1 }}</th>
+                      <td> -->
+<!-- <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px"> -->
+<!-- <ngb-highlight [result]="item.requestkey" [term]="filter.value"></!-->
+<!-- </td>
+                      <td><ngb-highlight [result]="item.type " [term]="filter.value"></ngb-highlight></td>
+                      <td><a class="btn btn-outline-dark bg-light" (click)="openScrollableContent(longContent,item)">view</a></td>
+                    </tr>
+                    </tbody>
+                  </table>  -->
+<!-- <div *ngFor="let item of requestData$ | async as list">
+                    <div [ngSwitch]="conditionExpression">
+                      <div *ngSwitchCase="expression">{{item.type}}</div>
+                      <div *ngSwitchDefault>output2</div>
+                    </div>
+                  </div> -->
+
+
+<!-- 
+    </div>
+</div> -->
+<div class="row"></div>
+<br>
+<div class="row"></div>
+
+<div class="row my-2 mt-5">
+    <div class="col-12 mb-2">
+        <button type="button" (click)="backClicked()" class="btn w-100 col-xs-2 btn-secondary text-center">
+      <span class="mt-4">
+          <i class="fas fa-long-arrow-alt-left"></i>
+      </span>
+      <span class="mt-0"> Back</span>
+    </button>
+    </div>
+    <div class="col-12">
+        <div class="">
+            <h3>My Activity</h3>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Filter by Services</label>
+            <select class="form-control" id="exampleFormControlSelect1" name="sel" [(ngModel)]="requestArgument" (change)="requestFilter()">
+        <option value="Expense Reimbersement">Expense Reimbursement</option>
+        <option value="Flight Booking">Flight Bookings</option>
+        <option value="Grievances">Grievances</option>
+        <option value="Cab Booking">Cab Booking</option>
+        <option value="Hotel Booking">Hotel Bookings</option>
+        <option value="Goods Movement">Goods Movement</option>
+        <option value="Vehicle Movement">Vehicle Movement</option>
+        <option value="All">All</option>
+      </select>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col">
+        <div class="btn-group w-100" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary" (click)="dateFilter()">
+        <span>Date</span>
+        <span *ngIf="dateTog=='up'">
+          <i class="fas fa-caret-up"></i>
+        </span>
+        <span *ngIf="dateTog=='down'">
+          <i class="fas fa-caret-down"></i>
+        </span>
+      </button>
+            <button type="button" class="btn btn-secondary" (click)="bookingFilter()">
+        <span>Booking Type A-Z</span>
+        <span *ngIf="bookingTog=='up'">
+          <i class="fas fa-caret-up"></i>
+        </span>
+        <span *ngIf="bookingTog=='down'">
+          <i class="fas fa-caret-down"></i>
+        </span>
+
+      </button>
+        </div>
+    </div>
+
+</div>
+<div class="row justify-content-center mt-4" *ngIf="toogleDataNotFound">
+    <div class="col-auto">
+        <div class="text-center ">
+            Data not Found
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center">
+
+    <div class="col-sm-6 " *ngFor="let item of requestData ;let i=index">
+
+        <div class="card mdc-card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <span [ngSwitch]="item.type">
+              <i *ngSwitchCase="'Flight Booking'" class="material-icons icon"> flight_takeoff </i>
+              <i *ngSwitchCase="'Hotel Booking'" class="material-icons icon"> hotel </i>
+              <i *ngSwitchCase="'Goods Movement'" class="material-icons icon"> local_shipping </i>
+              <i *ngSwitchCase="'Expense Reimbersement'" class="material-icons icon"> local_atm </i>
+              <i *ngSwitchCase="'Grievances'" class="material-icons icon"> ring_volume </i>
+              <i *ngSwitchCase="'Vehicle Movement'" class="material-icons icon"> directions_car </i>
+              <i *ngSwitchCase="'Query Resoultion'" class="material-icons icon"> contact_phone </i>
+              <i *ngSwitchCase="'Cab Booking'" class="material-icons icon">commute</i>
+
+            </span>
+
+
+                    </div>
+                    <div class="col">
+                        <span [ngSwitch]="item.type">
+              <h5 *ngSwitchCase="'Flight Booking'" class="card-title font-weight-bold h4"> Flight Booking </h5>
+              <h5 *ngSwitchCase="'Hotel Booking'" class="card-title font-weight-bold h4"> Hotel Booking </h5>
+              <h5 *ngSwitchCase="'Goods Movement'" class="card-title font-weight-bold h4"> Goods Movement</h5>
+              <h5 *ngSwitchCase="'Expense Reimbersement'" class="card-title font-weight-bold h4"> Expense Reimbursements
+              </h5>
+              <h5 *ngSwitchCase="'Grievances'" class="card-title font-weight-bold h4"> Grievances </h5>
+              <h5 *ngSwitchCase="'Vehicle Movement'" class="card-title font-weight-bold h4"> Vehicle Movement
+              </h5>
+              <h5 *ngSwitchCase="'Query Resoultion'" class="card-title font-weight-bold h4"> Query Resolution </h5>
+              <h5 *ngSwitchCase="'Cab Booking'" class="card-title font-weight-bold h4"> Cab Booking </h5>
+
+            </span>
+
+                    </div>
+                </div>
+
+                <span [ngSwitch]="item.type">
+          <div class="card-text text-right" *ngSwitchCase="'Flight Booking'">
+            <!--<div class="p-0 m-0"  *ngIf="item.detail.dot"> Date of Journey:
+              {{item.detail.dot.day}}/{{item.detail.dot.month}}/{{item.detail.dot.year}}</div>-->
+
+              <div class="p-0 m-0"  *ngIf="item.detail.dot"> Date of Travel:{{item.detail.dot}}
+               </div>
+
+            <div class="p-0 m-0" >Arrival Location: {{item.detail.arr}}</div>
+            
+            <!--<div class="p-0 m-0" *ngIf ="item.detail.arr!='Others'" >Arrival Location: {{item.detail.arr}}</div>-->
+            <div class="p-0 m-0" *ngIf ="item.detail.arr=='Others'" >Arrival Location(Others): {{item.detail.reasonforothers1}}</div>
+            <div class="p-0 m-0" >Departure Location: {{item.detail.dep}}</div>
+            <!--<div class="p-0 m-0" *ngIf="item.detail.dep!='Others'">Departure Location: {{item.detail.dep}}</div>-->
+            <div class="p-0 m-0" *ngIf ="item.detail.dep=='Others'" >Departure Location: {{item.detail.reasonforothers}}</div>
+          </div>
+          <div class="card-text text-right" *ngSwitchCase="'Cab Booking'">
+            <!--<div class="p-0 m-0"  *ngIf="item.detail.dot"> Date of Journey:
+              {{item.detail.dot.day}}/{{item.detail.dot.month}}/{{item.detail.dot.year}}</div>-->
+              <div class="p-0 m-0"  *ngIf="item.detail.dot"> Date of Journey:
+                {{item.detail.dot}} </div>
+
+              
+
+            <div class="p-0 m-0" >Current Location: {{item.detail.arr}}</div>
+            <div class="p-0 m-0" >Destination Location: {{item.detail.dep}}</div>
+          </div>
+          <div class="card-text text-right" *ngSwitchCase="'Hotel Booking'">
+            <!--<p class="p-0 m-0" >Check in Date:
+              {{item.detail.startDate.day}}/{{item.detail.startDate.month}}/{{item.detail.startDate.year}} </p>-->
+
+              <p class="p-0 m-0" >Check in Date:
+                {{item.detail.startDate}} </p>
+            <!--<p class="p-0 m-0" >Check out Date:
+              {{item.detail.endDate.day}}/{{item.detail.endDate.month}}/{{item.detail.endDate.year}}</p>-->
+              <p class="p-0 m-0" >Check out Date:
+                {{item.detail.endDate}}</p>
+                <!--<p class="p-0 m-0" >Check out Date:
+                  {{item.detail.endDate.day}}/{{item.detail.endDate.month}}/{{item.detail.endDate.year}}</p>-->
+            <p class="p-0 m-0" >Location: {{item.detail.location}}</p>
+            <p class="p-0 m-0" *ngIf="item.detail.location=='Others'" >Location (Others): {{item.detail.reasonvalue}}</p>
+          </div>
+
+          <div class="card-text text-right" *ngSwitchCase="'Goods Movement'">
+
+            <div class="p-0 m-0" >Date of Movement:
+              {{item.detail.dateofmovement}}
+            </div>
+
+            <!--<div class="p-0 m-0" >Date of Movement:
+              {{item.detail.dateofmovement.day}}/{{item.detail.dateofmovement.month}}/{{item.detail.dateofmovement.year}}
+            </div>-->
+
+            <div class="p-0 m-0" >Pickup City : {{item.detail.pickupcity}}</div>
+             
+          <div class="p-0 m-0"  *ngIf="item.detail.pickupcity=='Others'">Pickup City(Others) : {{item.detail.pickupcityreason}}</div>
+       
+          </div>
+
+
+
+
+          <!--<div class="p-0 m-0"  *ngIf="item.detail.pickUpCity=='Others'">Pickup City : {{item.detail.pickupcity}}</div>
+        </div>-->
+
+          <div class="card-text text-right" *ngSwitchCase="'Expense Reimbersement'">
+
+            <p class="p-0 m-0 " >Amount: Rs<span
+                class="font-weight-blod h5">{{item.detail.amount}}</span></p>
+                <p class="p-0 m-0">Date: {{item.detail.date| date:"dd/MM/yyyy"}}</p>
+
+
+            </div>
+            <div class="card-text text-right" *ngSwitchCase="'Grievances'">
+                <p class="p-0 m-0" *ngIf="item.detail.natureofgrievances!='Others' ">Nature of Grievances: {{item.detail.natureofgrievances}}
+                </p>
+                <p class="p-0 m-0" *ngIf="item.detail.natureofgrievances=='Others' ">Nature of Grievances(Others): {{item.detail.natureofreason1}}
+                </p>
+                <p class="p-0 m-0" *ngIf="item.detail.typesofgrievances!='Others' ">Type of Grievances: {{item.detail.typesofgrievances}}
+                </p>
+                <p class="p-0 m-0" *ngIf="item.detail.typesofgrievances=='Others' ">Type of Grievances(Others): {{item.detail.natureofreason}}
+                </p>
+                <p class="p-0 m-0">Date: {{item.detail.date| date:"dd/MM/yyyy"}}</p>
+
+            </div>
+            <div class="card-text text-right" *ngSwitchCase="'Vehicle Movement'">
+                <!--<p class="m-0 p-0" >Date of Movement: {{item.detail.dateofmovement.day}}/{{item.detail.dateofmovement.month}}/{{item.detail.dateofmovement.year}}
+                </p>-->
+                <p class="m-0 p-0">Date of Movement: {{item.detail.dateofmovement}}
+                </p>
+
+                <p class="m-0 p-0">Origination Address: {{item.detail.origination}}</p>
+                <p class="m-0 p-0">Designation Address: {{item.detail.designation}}</p>
+
+
+            </div>
+            <div class="card-text text-right" *ngSwitchCase="'Query Resoultion'">
+                <p class="m-0 p-0">Query: {{item.detail.query}}</p>
+                <p class="m-0 p-0"> Date: {{item.detail.date| date:"MM/dd/yyy"}}</p>
+
+            </div>
+
+
+            </span>
+
+            <button class="btn btn-outline-dark" data-toggle="collapse" [attr.data-target]="'#body'+item.requestkey" aria-expanded="false" aria-controls="collapseExample">More Details</button>
+            <div class="card-body collapse" [id]="'body'+item.requestkey">
+                <div [ngSwitch]="item.type">
+                    <div *ngSwitchCase="'Flight Booking'">
+                        <p class="m-0 p-0">Request ID: {{item.requestkey}}</p>
+                        <!--<p class="lead col-12">Type: {{item.type}}</p>-->
+                        <p class="m-0 p-0" *ngIf="item.npeople>0">No of People: {{item.npeople}}
+                        </p>
+                        <p class="m-0 p-0" *ngIf="item.npeople==0&&(item.type=='Flight Booking'||item.type=='Hotel Booking')">
+                            No of People: 1(self)</p>
+
+                        <div class="m-0 p-0" *ngIf="item.guests.length>0">Guests:
+
+                            <!--<div class="lead col-auto ml-5 " *ngFor="let item of item.guests;let i = index">{{i+1}}) {{item.item_text}}
+                            </div>-->
+                            <div *ngFor="let item of item.guests;let i = index">{{i+1}}) {{item.item_text}}
+                            </div>
+                            <!--<div *ngFor="let item of item.guests;let i = index">{{i+1}}) {{item.item_text[0]}}
+                            </div>-->
+                        </div>
+
+                        <div class="m-0 p-0">Date of Booking: {{item.detail.date| date:"MM/dd/yyy"}}</div>
+
+                        <div class="m-0 p-0">Time of Journey: {{item.detail.tot.hour}}:{{item.detail.tot.minute}}
+                        </div>
+                        <div class="m-0 p-0">Meal: {{item.detail.meal}}</div>
+                    </div>
+                    <div *ngSwitchCase="'Cab Booking'">
+                        <p class="m-0 p-0">Request ID: {{item.requestkey}}</p>
+                        <!--<p class="lead col-12">Type: {{item.type}}</p>-->
+                        <p class="m-0 p-0" *ngIf="item.npeople>0">No of People: {{item.npeople}}
+                        </p>
+                        <p class="m-0 p-0" *ngIf="item.npeople==0&&(item.type=='Flight Booking'||item.type=='Hotel Booking')">
+                            No of People: 1(self)</p>
+
+                        <div class="m-0 p-0" *ngIf="item.guests.length>0">Guests:
+
+                            <!--<div class="lead col-auto ml-5 " *ngFor="let item of item.guests;let i = index">{{i+1}}) {{item.item_text}}
+                            </div>-->
+                            <div class="m-0 p-0 " *ngFor="let item of item.guests;let i = index">{{i+1}}) {{item.item_text}}
+                            </div>
+                        </div>
+
+                        <div class="m-0 p-0">Date of Booking: {{item.detail.date| date:"MM/dd/yyy"}}</div>
+
+                        <div class="m-0 p-0">Time of Journey: {{item.detail.tot.hour}}:{{item.detail.tot.minute}}
+                        </div>
+
+                    </div>
+                    <div *ngSwitchCase="'Hotel Booking'">
+                        <p class="m-0 p-0">Request ID: {{item.requestkey}}</p>
+                        <!--<p class="lead col-12">Type: {{item.type}}</p>-->
+                        <p class="m-0 p-0" *ngIf="item.npeople>0">No of People: {{item.npeople}}
+                        </p>
+                        <p class="m-0 p-0" *ngIf="item.npeople==0&&(item.type=='Flight Booking'||item.type=='Hotel Booking')">
+                            No of People: 1(self)</p>
+
+                        <div class="m-0 p-0" *ngIf="item.guests.length>0">Guests:
+
+                            <!--<div class="lead col-auto ml-5 " *ngFor="let item of item.guests;let i = index">{{i+1}}) {{item.item_text}}
+                            </div>-->
+                            <div *ngFor="let item of item.guests;let i = index">{{i+1}}) {{item.item_text}}
+                            </div>
+                        </div>
+
+                        <div class="m-0 p-0">Date of Booking: {{item.detail.date| date:"MM/dd/yyy"}}</div>
+
+                        <div class="m-0 p-0">No of Rooms: {{item.detail.noroooms}}</div>
+                        <div class="m-0 p-0" *ngIf="item.detail.splitaccommodation">Split Accommodation: {{item.detail.splitaccommodation}}</div>
+                        <!--<div class="m-0 p-0" *ngIf="!item.detail.splitaccommodation">Split Accommodation: No</div>-->
+                        <div class="m-0 p-0" *ngIf="item.detail.splitaccommodation=='Yes'">Reason for split: {{item.detail.reasonforsplit}}
+                        </div>
+                        <!--<div class="m-0 p-0" *ngIf="!item.detail.splitaccommodation">Reason for split: None
+                        </div>-->
+                    </div>
+                    <div *ngSwitchCase="'Goods Movement'">
+                        <p class="m-0 p-0">Request ID: {{item.requestkey}}</p>
+                        <!--<p class="lead col-12">Type: {{item.type}}</p>-->
+                        <p class="m-0 p-0" *ngIf="item.npeople>0">No of People: {{item.npeople}}
+                        </p>
+                        <p class="m-0 p-0" *ngIf="item.npeople==0&&(item.type=='Flight Booking'||item.type=='Hotel Booking')">
+                            No of People: 1(self)</p>
+
+                        <div class="m-0 p-0" *ngIf="item.guests.length>0">Guests:
+
+                            <div class="lead col-auto ml-5 " *ngFor="let item of item.guests;let i = index">{{i+1}}) {{item.item_text}}
+                            </div>
+                        </div>
+                        <div class="m-0 p-0">Contact Person Name: {{item.detail.contactperson}}
+                        </div>
+
+
+                        <div class="m-0 p-0">Delivery Address: {{item.detail.deliveryadd}}
+                        </div>
+                        <div class="m-0 p-0" *ngIf="item.detail.deliveryadd=='Others'">Delivery Address(Others): {{item.detail.deliverycityreason}}
+                        </div>
+
+                        <div class="m-0 p-0">Storage Requirement : {{item.detail.requirementsofstorage}}
+                        </div>
+
+                        <div class="m-0 p-0">Booking Date: {{item.detail.date| date:"MM/dd/yyy"}}</div>
+                    </div>
+                    <div *ngSwitchCase="'Expense Reimbersement'">
+                        <p class="m-0 p-0">Request ID: {{item.requestkey}}</p>
+                        <!--<p class="lead col-12">Type: {{item.type}}</p>-->
+                        <div class="m-0 p-0">Nature of expense: {{item.detail.natureofexpense}}
+                        </div>
+
+                        <!-- <div class="col-12  lead">Item purchase: {{item.detail.itempurschase}}
+                        </div> -->
+
+
+                        <div class="m-0 p-0">Invoice no: {{item.detail.invoiceno}}</div>
+
+
+                        <img [src]="item.detail.invoiceimage" *ngIf="item.detail.invoiceimage" style="max-width:300px;max-height:300px" />
+
+                    </div>
+                    <div *ngSwitchCase="'Grievances'">
+                        <p class="m-0 p-0">Request ID: {{item.requestkey}}</p>
+                        <!-- <p class="lead col-12">Nature of Grievances: {{item.detail.typeOfService}}</p> -->
+                        <!--<p class="lead col-12">Type: {{item.detail.typesofgrievances}}</p>-->
+                        <p class="m-0 p-0" *ngIf="item.npeople>0">No of People: {{item.npeople}}
+                        </p>
+                        <p class="m-0 p-0" *ngIf="item.npeople==0&&(item.type=='Flight Booking'||item.type=='Hotel Booking')">
+                            No of People: 1(self)
+                        </p>
+
+                        <div class="m-0 p-0" *ngIf="item.guests.length>0">Guest:
+
+                            <p class="lead col-auto ml-5 " *ngFor="let item of item.guests;let i = index">{{i+1}}) {{item.item_text}}
+                            </p>
+                        </div>
+                        <!-- <p class="col-12 lead">Action Requested: {{item.detail.typeOfService}}
+                        </p>-->
+
+                        <p class="m-0 p-0">Description: {{item.detail.otherremarks}}</p>
+
+                        <!-- <hr>
+                        <p>image:</p>-->
+                        <img [src]="item.detail.photo" *ngIf="item.detail.photo" style="max-width:300px;max-height:300px" />
+                    </div>
+                    <div *ngSwitchCase="'Vehicle Movement'">
+                        <p class="m-0 p-0">Request ID: {{item.requestkey}}</p>
+                        <p class="m-0 p-0">Vehicle Type: {{item.detail.vehicletype}}</p>
+                        <!-- <p class="lead col-12" *ngIf="item.npeople>0">No of People: {{item.npeople}}</p> -->
+                        <!-- <p class="lead col-12" *ngIf="item.npeople==0&&(item.type=='Flight Booking'||item.type=='Hotel Booking')">
+                No of
+                People:
+                1(self)</p> -->
+
+                        <!-- <div class="lead col-12" *ngIf="item.guests.length>0">guest:
+
+                <div class="lead col-auto ml-5 " *ngFor="let item of item.guests;let i = index">{{i+1}})
+                  {{item.item_text}}</div>
+              </div> -->
+                        <!-- <div class="col-12  lead">No of RTO's : {{item.detail.noRto}}</div> -->
+                        <!-- <div class="col-12  lead">RTO Amount: {{item.detail.rtoAmount}}</div> -->
+                        <!-- <div class="col-12  lead">RTO invoice no: {{item.detail.rtoInvoiceNo}}</div> -->
+                        <!--<div class="m-0 p-0">Origination Address: {{item.detail.origination}}</div>-->
+                        <!--<div class="m-0 p-0">Designation Address: {{item.detail.designation}}</div>-->
+                        <div class="m-0 p-0">Booking Date: {{item.detail.date| date:"MM/dd/yyy"}}</div>
+
+                        <hr>
+                        <!-- <p>image:</p> -->
+                        <!-- <img [src]="item.detail.invoiceimage" *ngIf="item .detail.invoiceimage" style="max-width:300px;max-height:300px" /> -->
+                    </div>
+                    <div *ngSwitchCase="'Query Resoultion'">
+                        <p class="m-0 p-0">Request ID: {{item.requestkey}}</p>
+                        <p class="m-0 p-0">Type: {{item.type}}</p>
+                        <p class="m-0 p-0" *ngIf="item.npeople>0">No of People: {{item.npeople}}
+                        </p>
+                        <p class="m-0 p-0" *ngIf="item.npeople==0&&(item.type=='Flight Booking'||item.type=='Hotel Booking')">
+                            No of People: 1(self)
+                        </p>
+
+                        <div class="m-0 p-0" *ngIf="item.guests.length>0">Guests:
+
+                            <div class="lead col-auto ml-5 " *ngFor="let item of item.guests;let i = index">{{i+1}}) {{item.item_text}}
+                            </div>
+                        </div>
+                        <div class="m-0 p-0">Contact Person: {{item.detail.contactperson}}
+                        </div>
+
+
+                        <div class="m-0 p-0">Ticket Number: {{item.detail.ticketno}}</div>
+
+                        <div class="m-0 p-0">Response: {{item.detail.reponse}}</div>
+
+
+                        <!--<hr>
+                        <p>image:</p>-->
+                        <img [src]="item.detail.photo" *ngIf="item.detail.photo" height="auto" width="50%" />
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- <a class="btn btn-primary">Open</a> -->
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!-- <ng-template #longContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title h1">{{singleRequest.type}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-modal-data [data]="singleRequest"></app-modal-data>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template> -->

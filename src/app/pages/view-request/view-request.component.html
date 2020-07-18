@@ -1,0 +1,665 @@
+<div class="row"></div>
+<br>
+<div class="row"></div>
+<div class="row mt-5 pt-2">
+    <div class="col-12 mb-2">
+        <button type="button" (click)="backClicked()" class="btn w-100 col-xs-2 btn-secondary text-center">
+            <span class="mt-4">
+                <i class="fas fa-long-arrow-alt-left"></i>
+            </span>
+            <span class="mt-0"> Back</span>
+        </button>
+    </div>
+
+
+</div>
+
+<!--<div class="row m-2 mt-4">-->
+<!-- <div class="row m-2 mt-3 pt-2">
+    <button type="button" (click)="backClicked()" class="btn  col-xs-2 btn-light"><i class="material-icons">
+      arrow_back
+    </i>
+  </button>
+    <div class="pt-3">
+        <h3>Cab Booking</h3>
+    </div>
+</div> -->
+
+
+<!-- <app-userdetails [employee]="employee" [dependencyheading]="heading" [dependencybody]="dependencybody"></app-userdetails> -->
+<div class="row" style="margin-top:5%;margin-bottom:10%">
+    <div class="col-lg-12">
+        <div class="card border-0">
+            <div class="card-body" *ngIf="type=='Grievances'">
+                <div class="card-title">
+                    <h3>Grievances</h3>
+                </div>
+                <div class="row ">
+                    <div class="col-12">
+                        <div class="lead">
+                            Status: <span [ngSwitch]="entry.status">
+                                <i *ngSwitchCase="'red'" class="fas fa-circle text-danger"></i>
+                                <i *ngSwitchCase="'green'" class="fas fa-circle text-success"></i>
+                                <i *ngSwitchCase="'yellow'" class="fas fa-circle text-warning"> </i>
+                                <i *ngSwitchCase="'cancel'"  class="fas fa-window-close text-danger"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Request ID: {{entry.requestkey}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Type of Grievance: {{entry.detail.typesofgrievances}}
+                        </div>
+                        <div class="lead" *ngIf="entry.detail.typesofgrievances=='Others'">
+                            Type of Grievance(Others): {{entry.detail.natureofreason}}
+                        </div>
+
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Nature of Greivences: {{entry.detail.natureofgrievances}}
+                        </div>
+                        <div class="lead" *ngIf="entry.detail.natureofgrievances=='Others'">
+                            Nature of Greivences(Others): {{entry.detail.natureofreason1}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Description: {{entry.detail.otherremarks}}
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="lead">
+                            Date of Booking : {{entry.detail.date |date}}
+                        </div>
+                    </div>
+                    <div class="col-12 mt-2">
+                        <img [src]="entry.detail.photo" *ngIf="entry.detail.photo" height="auto" width="100%" />
+                    </div>
+
+
+
+
+                </div>
+                <div class="row justify-content-end mt-2" *ngIf="!(entry.status=='cancel'||entry.status=='rejected'||entry.status=='green')">
+                    <div class="col-4 col-md-2 pr-0">
+                        <button class="btn btn-outline-danger w-100 " (click)="Cancelrequest()">Cancel</button>
+                    </div>
+                    <div class="col-4 col-md-2 pl-0 ml-2">
+                        <button class="btn btn-outline-warning w-100 " [routerLink]="['../../editrequestId',id.requestId]">Modify</button>
+                    </div>
+
+                </div>
+                <!--<div class="col-4 col-md-2 pl-0 ml-2">
+                    <button class="btn btn-outline-warning w-100 " [routerLink]="['../../feedback',id.requestId]">Feedback</button>
+                </div>-->
+
+
+            </div>
+            <div class="card-body" *ngIf="type=='Flight Booking'">
+                <div class="card-title">
+                    <h3>Flight Booking</h3>
+                </div>
+                <div class="row ">
+                    <div class="col-12">
+                        <div class="lead">
+                            No of people: {{entry.npeople}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Status: <span [ngSwitch]="entry.status">
+                                <i *ngSwitchCase="'red'" class="fas fa-circle text-danger"></i>
+                                <i *ngSwitchCase="'green'" class="fas fa-circle text-success"></i>
+                                <i *ngSwitchCase="'yellow'" class="fas fa-circle text-warning"> </i>
+                                <i *ngSwitchCase="'cancel'"  class="fas fa-window-close text-danger"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Request ID: {{entry.requestkey}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Date of journey: {{entry.detail.dot}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Time of Travel: {{entry.npeople}}
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="lead">
+                            Arrival Location: {{entry.detail.arr}}
+                        </div>
+
+                        <div class="lead" *ngIf="entry.detail.arr=='Others'">
+                            Arrival Location(If others is selected): {{entry.detail.reasonforothers1}}
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-12">
+                        <div class="lead">
+                            Departure: {{entry.detail.dep}}
+                        </div>
+
+                        <div class="lead" *ngIf="entry.detail.dep== 'Others'">
+                            Departure(If others is selected): {{entry.detail.reasonforothers}}
+                        </div>
+
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Meal : {{entry.detail.meal}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Date of Booking : {{entry.detail.date |date}}
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-2">
+                        <div class="lead">
+                            <span class="font-weight-bolder">Guests</span>
+                            <hr>
+                            <div *ngFor="let item of entry.guests" class="mt-2">
+                                <div class="card" *ngIf="check(item.item_id); else elseTemplate">
+                                    <div class="card-body">
+                                        <div>Name: {{dependent[item.item_id-2].name}}</div>
+                                        <div>DOB: {{dependent[item.item_id-2].dob}}</div>
+                                        <div>Gender: {{dependent[item.item_id-2].gender}}</div>
+                                        <div>Relation: {{dependent[item.item_id-2].relation}}</div>
+                                    </div>
+                                </div>
+                                <ng-template #elseTemplate>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div>Name: {{userData.data.Person_Full_Name_First_Last}}</div>
+                                            <div>DOB: {{userData.data.dob}}</div>
+                                            <!-- <div>Gender: {{userData.data.Person_Full_Name_First_Last}}</div> -->
+                                            <!-- <div>Relation: {{userData.data.Person_Full_Name_First_Last}}</div> -->
+                                        </div>
+                                    </div>
+
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row justify-content-end mt-2" *ngIf="!(entry.status=='cancel'||entry.status=='rejected'||entry.status=='green')">
+                    <div class="col-4 col-md-2 pr-0">
+                        <button class="btn btn-outline-danger w-100 " (click)="Cancelrequest()">Cancel</button>
+                    </div>
+                    <div class="col-4 col-md-2 pl-0 ml-2">
+                        <button class="btn btn-outline-warning w-100 " [routerLink]="['../../editrequestId',id.requestId]">Modify</button>
+                    </div>
+                </div>
+
+                <div class="row justify-content-end mt-2" *ngIf="entry.status=='green'">
+                    <div class="col-4 col-md-2 pl-0 ml-2">
+                        <!--<button class="btn btn-outline-warning w-100 " [routerLink]="['../../viewticket',id.requestId]">View Ticket</button>-->
+                        <img [src]="entry.voucher" *ngIf="entry.voucher" height="auto" width="100%" />
+                    </div>
+
+                </div>
+
+
+
+
+
+
+            </div>
+            <div class="card-body" *ngIf="type=='Hotel Booking'">
+                <div class="card-title">
+                    <h3>Hotel Booking</h3>
+                </div>
+                <div class="row ">
+                    <div class="col-12">
+                        <div class="lead">
+                            No of people: {{entry.npeople}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Status: <span [ngSwitch]="entry.status">
+                                <i *ngSwitchCase="'red'" class="fas fa-circle text-danger"></i>
+                                <i *ngSwitchCase="'green'" class="fas fa-circle text-success"></i>
+                                <i *ngSwitchCase="'yellow'" class="fas fa-circle text-warning"> </i>
+                                <i *ngSwitchCase="'cancel'"  class="fas fa-window-close text-danger"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Request ID: {{entry.requestkey}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Split Accommodation: {{entry.detail.splitaccommodation}}
+                        </div>
+                    </div>
+                    <div class="col-12" *ngIf="entry.detail.splitaccommodation=='Yes'">
+                        <div class="lead">
+                            Reason for Split Accommodation: {{entry.detail.reasonforsplit}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Location: {{entry.detail.location}}
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="lead">
+                            Location(Others): {{entry.detail.reasonvalue}}
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-12">
+                        <div class="lead">
+                            Check In: {{entry.detail.startDate|date}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Check Out : {{entry.detail.endDate|date}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            No of Rooms : {{entry.detail.noroooms}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Date of Booking : {{entry.detail.date |date}}
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-2">
+                        <div class="lead">
+                            <span class="font-weight-bolder">Guests</span>
+                            <hr>
+                            <div *ngFor="let item of entry.guests" class="mt-2">
+                                <div class="card" *ngIf="check(item.item_id); else elseTemplate">
+                                    <div class="card-body">
+                                        <div>Name: {{dependent[item.item_id-2].name}}</div>
+                                        <div>DOB: {{dependent[item.item_id-2].dob}}</div>
+                                        <div>Gender: {{dependent[item.item_id-2].gender}}</div>
+                                        <div>Relation: {{dependent[item.item_id-2].relation}}</div>
+                                    </div>
+                                </div>
+                                <ng-template #elseTemplate>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div>Name: {{userData.data.Person_Full_Name_First_Last}}</div>
+                                            <div>DOB: {{userData.data.dob}}</div>
+                                            <!-- <div>Gender: {{userData.data.Person_Full_Name_First_Last}}</div> -->
+                                            <!-- <div>Relation: {{userData.data.Person_Full_Name_First_Last}}</div> -->
+                                        </div>
+                                    </div>
+
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row justify-content-end mt-2" *ngIf="!(entry.status=='cancel'||entry.status=='rejected'||entry.status=='green')">
+                    <div class="col-4 col-md-2 pr-0">
+                        <button class="btn btn-outline-danger w-100 " (click)="Cancelrequest()">Cancel</button>
+                    </div>
+                    <div class="col-4 col-md-2 pl-0 ml-2">
+                        <button class="btn btn-outline-warning w-100 " [routerLink]="['../../editrequestId',id.requestId]">Modify</button>
+                    </div>
+                </div>
+                <div class="row justify-content-end mt-2" *ngIf="entry.status=='green'">
+                    <div class="col-4 col-md-2 pl-0 ml-2">
+                        <!--<button class="btn btn-outline-warning w-100 " [routerLink]="['../../viewticket',id.requestId]">View Ticket</button>-->
+                        <img [src]="entry.voucher" *ngIf="entry.voucher" height="auto" width="100%" />
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="card-body" *ngIf="type=='Expense Reimbersement'">
+                <div class="card-title">
+                    <h3>Expense Reimbersement</h3>
+                </div>
+                <div class="row ">
+
+                    <div class="col-12">
+                        <div class="lead">
+                            Status: <span [ngSwitch]="entry.status">
+                                <i *ngSwitchCase="'red'" class="fas fa-circle text-danger"></i>
+                                <i *ngSwitchCase="'green'" class="fas fa-circle text-success"></i>
+                                <i *ngSwitchCase="'yellow'" class="fas fa-circle text-warning"> </i>
+                                <i *ngSwitchCase="'cancel'"  class="fas fa-window-close text-danger"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Request ID: {{entry.requestkey}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Nature of expense: {{entry.detail.natureofexpense}}
+                        </div>
+                    </div>
+                    <div class="col-12" *ngIf="entry.detail.splitaccommodation=='Yes'">
+                        <div class="lead">
+                            Amount: {{entry.detail.amount}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Invoice no: {{entry.detail.invoiceno}}
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="lead">
+                            Date of Booking : {{entry.detail.date |date}}
+                        </div>
+                    </div>
+                    <div class="col-12 mt-2">
+                        <img [src]="entry.detail.photo" *ngIf="entry.detail.photo" height="auto" width="100%" />
+                    </div>
+                </div>
+                <div class="row justify-content-end mt-2" *ngIf="!(entry.status=='cancel'||entry.status=='rejected'||entry.status=='green')">
+                    <div class="col-4 col-md-2 pr-0">
+                        <button class="btn btn-outline-danger w-100 " (click)="Cancelrequest()">Cancel</button>
+                    </div>
+                    <div class="col-4 col-md-2 pl-0 ml-2">
+                        <button class="btn btn-outline-warning w-100 " [routerLink]="['../../editrequestId',id.requestId]">Modify</button>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="card-body" *ngIf="type=='Cab Booking'">
+                <div class="card-title">
+                    <h3>Cab Booking</h3>
+                </div>
+                <div class="row ">
+                    <div class="col-12">
+                        <div class="lead">
+                            No of people: {{entry.npeople}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Status: <span [ngSwitch]="entry.status">
+                                <i *ngSwitchCase="'red'" class="fas fa-circle text-danger"></i>
+                                <i *ngSwitchCase="'green'" class="fas fa-circle text-success"></i>
+                                <i *ngSwitchCase="'yellow'" class="fas fa-circle text-warning"> </i>
+                                <i *ngSwitchCase="'cancel'"  class="fas fa-window-close text-danger"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Request ID: {{entry.requestkey}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Date of Travel: {{entry.detail.dot|date}}
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="lead">
+                            Time of Travel : {{entry.detail.tot.hour}}:{{entry.detail.tot.minute}}
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="lead">
+                            Current Location : {{entry.detail.arr}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Destination Location : {{entry.detail.dep}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Date of Booking : {{entry.detail.date |date}}
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-2">
+                        <div class="lead">
+                            <span class="font-weight-bolder">Guests</span>
+                            <hr>
+                            <div *ngFor="let item of entry.guests" class="mt-2">
+                                <div class="card" *ngIf="check(item.item_id); else elseTemplate">
+                                    <div class="card-body">
+                                        <div>Name: {{dependent[item.item_id-2].name}}</div>
+                                        <div>DOB: {{dependent[item.item_id-2].dob}}</div>
+                                        <div>Gender: {{dependent[item.item_id-2].gender}}</div>
+                                        <div>Relation: {{dependent[item.item_id-2].relation}}</div>
+                                    </div>
+                                </div>
+                                <ng-template #elseTemplate>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div>Name: {{userData.data.Person_Full_Name_First_Last}}</div>
+                                            <div>DOB: {{userData.data.dob}}</div>
+                                            <!-- <div>Gender: {{userData.data.Person_Full_Name_First_Last}}</div> -->
+                                            <!-- <div>Relation: {{userData.data.Person_Full_Name_First_Last}}</div> -->
+                                        </div>
+                                    </div>
+
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row justify-content-end mt-2" *ngIf="!(entry.status=='cancel'||entry.status=='rejected'||entry.status=='green')">
+                    <div class="col-4 col-md-2 pr-0">
+                        <button class="btn btn-outline-danger w-100 " (click)="Cancelrequest()">Cancel</button>
+                    </div>
+                    <div class="col-4 col-md-2 pl-0 ml-2">
+                        <button class="btn btn-outline-warning w-100 " [routerLink]="['../../editrequestId',id.requestId]">Modify</button>
+                    </div>
+                </div>
+
+                <div class="row justify-content-end mt-2" *ngIf="entry.status=='green'">
+                    <div class="col-4 col-md-2 pl-0 ml-2">
+                        <!--<button class="btn btn-outline-warning w-100 " [routerLink]="['../../viewticket',id.requestId]">View Ticket</button>-->
+                        <img [src]="entry.voucher" *ngIf="entry.voucher" height="auto" width="100%" />
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="card-body" *ngIf="type=='Goods Movement'">
+                <div class="card-title">
+                    <h3>Goods Movement</h3>
+                </div>
+                <div class="row ">
+
+                    <div class="col-12">
+                        <div class="lead">
+                            Status: <span [ngSwitch]="entry.status">
+                                <i *ngSwitchCase="'red'" class="fas fa-circle text-danger"></i>
+                                <i *ngSwitchCase="'green'" class="fas fa-circle text-success"></i>
+                                <i *ngSwitchCase="'yellow'" class="fas fa-circle text-warning"> </i>
+                                <i *ngSwitchCase="'cancel'"  class="fas fa-window-close text-danger"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Request ID: {{entry.requestkey}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Date of Movement: {{entry.detail.dateofmovement|date}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Pickup city: {{entry.detail.pickupcity}}
+                        </div>
+
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Delivery city: {{entry.detail.deliveryadd}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Contact person name: {{entry.detail.contactperson}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Contact person email : {{entry.detail.contactpersonemail}}
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="lead">
+                            Contact person phone no : {{entry.detail.contactpersonphone}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Storage Requirement : {{entry.detail.requirementsofstorage}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Date of Booking : {{entry.detail.date |date}}
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <div class="row justify-content-end mt-2" *ngIf="!(entry.status=='cancel'||entry.status=='rejected'||entry.status=='green')">
+                    <div class="col-4 col-md-2 pr-0">
+                        <button class="btn btn-outline-danger w-100 " (click)="Cancelrequest()">Cancel</button>
+                    </div>
+                    <div class="col-4 col-md-2 pl-0 ml-2">
+                        <button class="btn btn-outline-warning w-100 " [routerLink]="['../../editrequestId',id.requestId]">Modify</button>
+                    </div>
+                </div>
+
+                <div class="row justify-content-end mt-2" *ngIf="entry.status=='green'">
+                    <div class="col-4 col-md-2 pl-0 ml-2">
+                        <!--<button class="btn btn-outline-warning w-100 " [routerLink]="['../../viewticket',id.requestId]">View Ticket</button>-->
+                        <img [src]="entry.voucher" *ngIf="entry.voucher" height="auto" width="100%" />
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="card-body" *ngIf="type=='Vehicle Movement'">
+                <div class="card-title">
+                    <h3>Vehicle Movement</h3>
+                </div>
+                <div class="row ">
+
+                    <div class="col-12">
+                        <div class="lead">
+                            Status: <span [ngSwitch]="entry.status">
+                                <i *ngSwitchCase="'red'" class="fas fa-circle text-danger"></i>
+                                <i *ngSwitchCase="'green'" class="fas fa-circle text-success"></i>
+                                <i *ngSwitchCase="'yellow'" class="fas fa-circle text-warning"> </i>
+                                <i *ngSwitchCase="'cancel'"  class="fas fa-window-close text-danger"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Request ID: {{entry.requestkey}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Date of Movement: {{entry.detail.dateofmovement|date}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Origination: {{entry.detail.origination}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Designation: {{entry.detail.designation}}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="lead">
+                            Vehicle Type: {{entry.detail.vehicletype}}
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+                <div class="row justify-content-end mt-2" *ngIf="!(entry.status=='cancel'||entry.status=='rejected'||entry.status=='green')">
+                    <div class="col-4 col-md-2 pr-0">
+                        <button class="btn btn-outline-danger w-100 " (click)="Cancelrequest()">Cancel</button>
+                    </div>
+                    <div class="col-4 col-md-2 pl-0 ml-2">
+                        <button class="btn btn-outline-warning w-100 " [routerLink]="['../../editrequestId',id.requestId]">Modify</button>
+                    </div>
+                </div>
+
+                <div class="row justify-content-end mt-2" *ngIf="entry.status=='green'">
+                    <div class="col-4 col-md-2 pl-0 ml-2">
+                        <!--<button class="btn btn-outline-warning w-100 " [routerLink]="['../../viewticket',id.requestId]">View Ticket</button>-->
+                        <img [src]="entry.voucher" *ngIf="entry.voucher" height="auto" width="100%" />
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="alert alert-info" role="alert" *ngIf="request.data.modification=='requested'">
+                Waiting for approval to modify the request
+            </div>
+            <div class="alert alert-info" role="alert" *ngIf="request.data.modification=='approved'">
+                Modification approved
+            </div>
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+option{
+    font-size: 0.2rem;
+}
+.ichover:hover{
+    color: white;
+    background-color: darkorange;
+}
+.ichover{
+    color: darkorange;
+}

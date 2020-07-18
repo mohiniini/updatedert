@@ -1,0 +1,421 @@
+<div class="row m-2  pt-5">
+    <button type="button" (click)="backClicked()" class="btn  col-xs-2 btn-light"><i class="material-icons">
+            arrow_back
+        </i>
+    </button>
+</div>
+<div class="row pt-4 ml-5">
+    <!-- <div class="h3   font-weight-bold text-capitalize  ">Add New employee</div>-->
+    <div class="h1">Add Employee</div>
+</div>
+
+<div class="card">
+    <div class="card-body m-2">
+        <div class="row  justify-content-center">
+            <div class=" col-9 input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                </div>
+
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" (change)="fileupload($event)" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>
+
+
+            </div>
+            <div class="col-3 input-group mb-3">
+                <select class="form-control" [(ngModel)]="processorId">
+                    <option [value]="undef" disabled>Select Processor</option>
+                    <option *ngFor="let processor of processorList" [value]="processor._id">
+                        {{processor.data.name}}
+                    </option>
+                    <option [value]="undef" >none</option>
+                </select>
+            </div>
+            <div class="col-auto">
+
+                <button (click)="upload()" class="btn btn-outline-success">Save Upload</button>
+            </div>
+        </div>
+        <hr>
+        <form #f="ngForm">
+
+
+            <div class="form-group">
+                <label>Person : Full Name</label><span class="required">*</span>
+                <input type="text" class="form-control" id="exampleInputPassword1" name="Person_Full_Name_First_Last" #Person_Full_Name_First_Last='ngModel' [(ngModel)]="emp.Person_Full_Name_First_Last" pattern="[a-zA-Z\s]{1,}" required>
+                <div [hidden]="Person_Full_Name_First_Last.valid || Person_Full_Name_First_Last.pristine" class="alert alert-danger m-0 mt-2"> Please use only alphabets </div>
+                <!--<input type="text" class="form-control" id="exampleInputPassword1" [(ngModel)]="emp.Person_Full_Name_First_Last" required>-->
+            </div>
+
+            <div class="form-group ">
+                <label> Person : Email Address</label><span class="required">*</span>
+                <input type="email" class="form-control " id="exampleInputPassword2 " name="emai" #emai='ngModel' [(ngModel)]="emp.email" required>
+                <div [hidden]="emai.valid || emai.pristine" class="alert alert-danger m-0 mt-2"> Please fill valid email </div>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [(ngModel)]="emp.email">-->
+            </div>
+
+
+
+            <div class="form-group ">
+                <label>Person: phone no</label><span class="required">*</span>
+                <input type="text " class="form-control " id="exampleInputPassword3" name="Person_phone_no" #Person_phone_no='ngModel' [(ngModel)]="emp.Person_phone_no" pattern="[6789][0-9]{9}" required>
+                <div [hidden]="Person_phone_no.valid || Person_phone_no.pristine" class="alert alert-danger m-0 mt-2">
+                    Please fill valid phone no. </div>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [(ngModel)]="emp.Person_phone_no ">-->
+            </div>
+
+
+
+            <div class="form-group ">
+                <label>Requisition : Company Code</label><span class="required">*</span>
+                <input type="text " class="form-control " id="exampleInputPassword4 " name="fef" #fef='ngModel' [(ngModel)]="emp.Requisition_Company_Code " pattern="[a-zA-Z0-9]{1,}" required>
+                <div [hidden]="fef.valid || fef.pristine" class="alert alert-danger m-0 mt-2"> Please fill valid details
+                </div>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [(ngModel)]="emp.Requisition_Company_Code ">-->
+            </div>
+
+
+
+
+            <div class="form-group ">
+                <label>Requisition : Company Country</label><span class="required">*</span>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [formControl]="emp.Requisition_Company_Country " pattern="[a-zA-Z]{3,}" required>-->
+                <input type="text " class="form-control " id="exampleInputPassword5" name="ferf" #ferf='ngModel' [(ngModel)]="emp.Requisition_Company_Country " pattern="[a-zA-Z\s]{1,}" required>
+                <div [hidden]="ferf.valid || ferf.pristine" class="alert alert-danger m-0 mt-2"> Please fill valid company country </div>
+            </div>
+
+
+
+
+            <div class="form-group ">
+                <label>Primary Location : Country Full Name</label><span class="required">*</span>
+                <input type="text " class="form-control " id="exampleInputPassword6 " name="cf" #cf='ngModel' [(ngModel)]="emp.Primary_Location_Country_Full_Name " pattern="[a-zA-Z]{1,}" required>
+                <div [hidden]="cf.valid || cf.pristine" class="alert alert-danger m-0 mt-2"> Please use only alphabets
+                </div>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [(ngModel)]="emp.Primary_Location_Country_Full_Name ">-->
+            </div>
+
+
+
+
+            <div class="form-group ">
+                <label>Offer Intake Global : Job Location City</label><span class="required">*</span>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [formControl]="emp.Offer_Intake_Global_Job_Location_City " pattern="[a-zA-Z]{3,}" required>-->
+                <input type="text " class="form-control " id="exampleInputPassword7" name="jh" #jh='ngModel' [(ngModel)]="emp.Offer_Intake_Global_Job_Location_City" pattern="[a-zA-Z]{1,}" required>
+                <div [hidden]="jh.valid || jh.pristine" class="alert alert-danger m-0 mt-2"> Please fill valid job city
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group ">
+                <label>Requisition : Requisition ID</label><span class="required">*</span>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [formControl]="emp.Requisition_Requisition_ID " pattern="[a-zA-Z]{3,}" required>-->
+                <input type="text " class="form-control " id="exampleInputPassword8 " name="km" #km='ngModel' [(ngModel)]="emp.Requisition_Requisition_ID " pattern="[a-zA-Z0-9\s]{1,}" required>
+                <div [hidden]="km.valid || km.pristine" class="alert alert-danger m-0 mt-2"> Please fill valid id</div>
+            </div>
+
+
+
+            <div class="form-group ">
+                <label>Requisition : Position Number</label><span class="required">*</span>
+                <!--input type="text " class="form-control " id="exampleInputPassword1 " [formControl]="emp.Requisition_Position_Number " pattern="[a-zA-Z]{3,}" required>-->
+                <input type="text " class="form-control " id="exampleInputPassword10 " name="lm" #lm='ngModel' [(ngModel)]="emp.Requisition_Position_Number " pattern="[a-zA-Z0-9\s]{1,}" required>
+                <div [hidden]="lm.valid || lm.pristine" class="alert alert-danger m-0 mt-2"> Please fill valid position number
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group ">
+                <label>Primary Recruiter : Full Name : First Last</label><span class="required">*</span>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [formControl]="emp.Primary_Recruiter_Full_Name_First_Last " pattern="[a-zA-Z]{3,}" required>-->
+                <input type="text " class="form-control " id="exampleInputPassword11 " name="dde" #dde='ngModel' [(ngModel)]="emp.Primary_Recruiter_Full_Name_First_Last " pattern="[a-zA-Z\s]{1,}" required>
+                <div [hidden]="dde.valid || dde.pristine" class="alert alert-danger m-0 mt-2"> Please fill valid recruiter name</div>
+            </div>
+
+
+
+            <div class="form-group ">
+                <label>Offer Intake Global : Telephone</label><span class="required">*</span>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [formControl]="emp.Offer_Intake_Global_Telephone " pattern="[0-9]{3,}" required>-->
+                <input type="text " class="form-control " id="exampleInputPassword12" name="mnb" #mnb='ngModel' [(ngModel)]="emp.Offer_Intake_Global_Telephone " pattern="[0-9]{7,10}" required>
+                <div [hidden]="mnb.valid || mnb.pristine" class="alert alert-danger m-0 mt-2"> Please fill valid telephone no.</div>
+            </div>
+
+
+
+            <div class="form-group ">
+                <label>Requisition : Cost Center Code</label><span class="required">*</span>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [formControl]="emp.Requisition_Cost_Center_Code " pattern="[a-zA-Z]{3,}" required>-->
+                <input type="text " class="form-control " id="exampleInputPassword13 " name="rfr" #rfr='ngModel' [(ngModel)]="emp.Requisition_Cost_Center_Code " pattern="[0-9]{1,}" required>
+                <div [hidden]="rfr.valid || rfr.pristine" class="alert alert-danger m-0 mt-2"> Please fill only digits
+                </div>
+            </div>
+
+
+
+            <div class="form-group ">
+                <label>Offer Intake Global : Hiring Manager</label><span class="required">*</span>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [formControl]="emp.Offer_Intake_Global_Hiring_Manager" pattern="[a-zA-Z]{3,}" required>-->
+                <input type="text " class="form-control " id="exampleInputPassword14 " name="mananger" #mananger='ngModel' [(ngModel)]="emp.Offer_Intake_Global_Hiring_Manager" pattern="[a-zA-Z\s]{1,}" required>
+                <div [hidden]="mananger.valid || mananger.pristine" class="alert alert-danger m-0 mt-2"> Please only use alphabets
+                </div>
+            </div>
+
+
+            <div class="form-group ">
+                <label>Offer Intake Global : Hiring Manager Alias</label><span class="required">*</span>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [formControl]="emp.Offer_Intake_Global_Hiring_Manager_Alias " pattern="[a-zA-Z]{3,}" required>-->
+                <input type="text " class="form-control " id="exampleInputPassword15 " name="manage" #manage='ngModel' [(ngModel)]="emp.Offer_Intake_Global_Hiring_Manager_Alias " pattern="[a-zA-Z\s]{1,}" required>
+                <div [hidden]="manage.valid || manage.pristine" class="alert alert-danger m-0 mt-2"> Please fill valid details
+                </div>
+
+            </div>
+
+
+
+            <div class="form-group ">
+                <label>Offer Intake Global : Reports To Manager</label><span class="required">*</span>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [formControl]="emp.Offer_Intake_Global_ReportsToManager " pattern="[a-zA-Z]{3,}" required>-->
+                <input type="text " class="form-control " id="exampleInputPassword16 " name="wee" #wee='ngModel' [(ngModel)]="emp.Offer_Intake_Global_ReportsToManager " pattern="[a-zA-Z\s]{1,}" required>
+                <div [hidden]="wee.valid || wee.pristine" class="alert alert-danger m-0 mt-2"> Please only use alphabets
+                </div>
+            </div>
+
+
+
+            <div class="form-group ">
+                <label>Offer Intake Global : Reports To Manager Alias</label><span class="required">*</span>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [formControl]="emp.Offer_Intake_Global_ReportsToManagerAlias" pattern="[a-zA-Z]{3,}" required>-->
+                <input type="text " class="form-control " id="exampleInputPassword17" name="yt" #yt='ngModel' [(ngModel)]="emp.Offer_Intake_Global_ReportsToManagerAlias" pattern="[a-zA-Z\s]{1,}" required>
+                <div [hidden]="yt.valid || yt.pristine" class="alert alert-danger m-0 mt-2"> Please fill valid details
+                </div>
+            </div>
+
+
+
+            <div class="form-group ">
+                <label>Offer Intake Global : Relocation Needed</label><span class="required">*</span>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [formControl]="emp.Offer_Intake_Global_Relocation_Needed " pattern="[a-zA-Z]{3,}" required>-->
+                <input type="text " class="form-control " id="exampleInputPassword18 " name="iu" #iu='ngModel' [(ngModel)]="emp.Offer_Intake_Global_Relocation_Needed " pattern="[a-zA-Z]{1,}" required>
+                <div [hidden]="iu.valid || iu.pristine" class="alert alert-danger m-0 mt-2"> Please fill valid details
+                </div>
+
+            </div>
+
+
+
+            <div class="form-group ">
+                <label>Offer Intake Global : Relocation Type</label><span class="required">*</span>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [formControl]="emp.Offer_Intake_Global_Relocation_Type " pattern="[a-zA-Z]{3,}" required>-->
+                <input type="text " class="form-control " id="exampleInputPassword19 " name="cd" #cd='ngModel' [(ngModel)]="emp.Offer_Intake_Global_Relocation_Type " pattern="[a-zA-Z\s]{1,}" required>
+                <div [hidden]="cd.valid || cd.pristine" class="alert alert-danger m-0 mt-2"> Please only use alphabets
+                </div>
+            </div>
+
+
+
+            <div class="form-group ">
+                <label>Offer Intake Global : Relocation Tier</label><span class="required">*</span>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [formControl]="emp.Offer_Intake_Global_Relocation_Tier " pattern="[a-zA-Z]{3,}" required>-->
+                <input type="text " class="form-control " id="exampleInputPassword20" name="tier" #tier='ngModel' [(ngModel)]="emp.Offer_Intake_Global_Relocation_Tier " pattern="[a-zA-Z\s]{1,}" required>
+                <div [hidden]="tier.valid || tier.pristine" class="alert alert-danger m-0 mt-2"> Please fill valid details
+                </div>
+            </div>
+
+
+
+            <div class="form-group ">
+                <label>Offer Intake Global : Relocation Summary</label><span class="required">*</span>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [formControl]="emp.Offer_Intake_Global_Relocation_Summary " pattern="[a-zA-Z]{3,}" required>-->
+                <input type="text " class="form-control " id="exampleInputPassword21" name="reloc" #reloc='ngModel' [(ngModel)]="emp.Offer_Intake_Global_Relocation_Summary " pattern="[a-zA-Z\s]{1,}" required>
+                <div [hidden]="reloc.valid || reloc.pristine" class="alert alert-danger m-0 mt-2"> Please fill valid details
+                </div>
+            </div>
+
+
+            <!--<div class="form-group ">
+                <label>Offer Intake Global : Tentative Start Date</label><span class="required">*</span><br>
+                <ngb-datepicker #dp [(ngModel)]="model1" (navigate)="date = $event.next"></ngb-datepicker>
+            </div>-->
+            <div class="form-group ">
+                <label for="exampleInputEmail1"> Tentative Start Date</label><span class="required">*</span>
+                <input type="date" class="form-control" name="dp2" (change)=" checkvalue2(dp2.value)" [ngStyle]="{'border-left':dateValidationnn(dp2.value) ? '5px solid #42A948' : '5px solid #a94442' }" #dp2='ngModel' [(ngModel)]="model" required />
+            </div>
+
+
+
+            <div class="form-group ">
+                <label>First Offer : Offer Accepted</label><span class="required">*</span>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [formControl]="emp.First_Offer_Offer_Accepted " pattern="[a-zA-Z]{3,}" required>-->
+                <input type="text " class="form-control " id="exampleInputPassword22" name="jhg" #jhg='ngModel' [(ngModel)]="emp.First_Offer_Offer_Accepted " pattern="[a-zA-Z\s]{1,}" required>
+                <div [hidden]="jhg.valid || jhg.pristine" class="alert alert-danger m-0 mt-2"> Please fill valid details
+                </div>
+            </div>
+
+
+
+            <div class="form-group ">
+                <label>Status</label><span class="required">*</span>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [formControl]="emp.Status " pattern="[a-zA-Z]{3,}" required>-->
+                <input type="text " class="form-control " id="exampleInputPassword23" name="status" #status='ngModel' [(ngModel)]="emp.Status " pattern="[a-zA-Z\s]{1,}" required>
+                <div [hidden]="status.valid || status.pristine" class="alert alert-danger m-0 mt-2"> Please use only alphabets
+                </div>
+            </div>
+
+
+
+            <div class="form-group ">
+                <label>Offer Intake Global :Form Status Offer Intake Global</label><span class="required">*</span>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [formControl]="emp.Offer_Intake_Global_Form_Status_Offer_Intake_Global " pattern="[a-zA-Z]{3,}" required>-->
+                <input type="text " class="form-control " id="exampleInputPassword24 " name="global" #global='ngModel' [(ngModel)]="emp.Offer_Intake_Global_Form_Status_Offer_Intake_Global " pattern="[a-zA-Z\s]{1,}" required>
+                <div [hidden]="global.valid || global.pristine" class="alert alert-danger m-0 mt-2"> Please fill valid details
+                </div>
+            </div>
+
+
+            <div class="form-group ">
+                <label>Requisition : First Placed in Status Pre Onboard : Hire Complete</label><span class="required">*</span>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [formControl]="emp.Requisition_First_Placed_in_Status_Pre_Onboard_Hire_Complete " pattern="[a-zA-Z]{3,}" required>-->
+                <input type="text " class="form-control " id="exampleInputPassword25 " name="Hire" #Hire='ngModel' [(ngModel)]="emp.Requisition_First_Placed_in_Status_Pre_Onboard_Hire_Complete " pattern="[a-zA-Z\s]{1,}" required>
+                <div [hidden]="Hire.valid || Hire.pristine" class="alert alert-danger m-0 mt-2"> Please fill valid details
+                </div>
+            </div>
+
+
+
+
+
+            <!--<div class="form-group ">
+                <label>Date of Birth</label><span class="required">*</span><br>
+                <ngb-datepicker #dp [(ngModel)]="model2" name="dp" (navigate)="date = $event.next"></ngb-datepicker>
+            </div>-->
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">Date of Birth</label><span class="required">*</span>
+                <input type="date" class="form-control" name="dp" (change)=" checkvalue(dp.value)" [ngStyle]="{'border-left':dateValidation(dp.value) ? '5px solid #42A948' : '5px solid #a94442' }" #dp='ngModel' [(ngModel)]="model2" required />
+            </div>
+
+
+
+            <div class="form-group ">
+                <label>Nationality</label><span class="required">*</span>
+                <input type="text " class="form-control " id="exampleInputPassword26 " name="nationality" #nationality='ngModel' [(ngModel)]="emp.nationality" pattern="[a-zA-Z\s]{1,}" required>
+                <div [hidden]="nationality.valid || nationality.pristine" class="alert alert-danger m-0 mt-2"> Please fill valid nationality</div>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [(ngModel)]="emp.nationality">-->
+            </div>
+
+
+
+
+            <div class="form-group ">
+                <label>Entity</label><span class="required">*</span>
+                <input type="text " class="form-control " id="exampleInputPassword27 " name="entity" #entity='ngModel' [(ngModel)]="emp.entity" pattern="[a-zA-Z0-9\s]{1,}" required>
+                <div [hidden]="entity.valid || entity.pristine" class="alert alert-danger m-0 mt-2"> Please fill valid entity
+                </div>
+
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [(ngModel)]="emp.entity">-->
+            </div>
+
+
+
+            <div class="form-group ">
+                <label>Joining Location</label><span class="required">*</span>
+                <input type="text " class="form-control " id="exampleInputPassword28 " name="joininglocation" #joininglocation='ngModel' [(ngModel)]="emp.joininglocation" pattern="[a-zA-Z\s]{1,}" required>
+                <div [hidden]="joininglocation.valid || joininglocation.pristine" class="alert alert-danger m-0 mt-2">
+                    Please fill valid joining location</div>
+                <!--<input type="text " class="form-control " id="exampleInputPassword1 " [(ngModel)]="emp.joininglocation">-->
+            </div>
+
+            <!--<div class="form-group ">
+                <label>Person : Start Date</label><span class="required">*</span>
+                <br>
+                <ngb-datepicker #dp [(ngModel)]="model" name="dp" (navigate)="date = $event.next"></ngb-datepicker>
+
+            </div>-->
+
+            <div class="form-group ">
+                <label for="exampleInputEmail1">Start Date</label><span class="required">*</span>
+                <input type="date" class="form-control" (change)=" checkvalue1(dp1.value)" [ngStyle]="{'border-left':dateValidationn(dp1.value) ? '5px solid #42A948' : '5px solid #a94442' }" name="dp1" #dp1='ngModel' [(ngModel)]="model1" required />
+            </div>
+            <br>
+
+            <!-- =================================== -->
+            <div class="form-group ">
+                <label>Services</label><span class="required">*</span>
+                <br>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="true" id="f1" name="flch" [(ngModel)]="serviesCheck.flightBooking">
+                    <label class="form-check-label" for="f1">
+                        Flight Booking 
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="false" id="h1" name="htch" [(ngModel)]="serviesCheck.hotelBooking">
+                    <label class="form-check-label" for="h1">
+                        Hotel Booking 
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="c1" name="cbch" [(ngModel)]="serviesCheck.cabBooking">
+                    <label class="form-check-label" for="c1">
+                        Cab Booking
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="er1" name="erch" [(ngModel)]="serviesCheck.expenseRiembursements">
+                    <label class="form-check-label" for="er1">
+                        Expense Reimbursements
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="gm1" name="gmch" [(ngModel)]="serviesCheck.goodsMovement">
+                    <label class="form-check-label" for="gm1">
+                        Goods Movement
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="vm1" name="vmch" [(ngModel)]="serviesCheck.vehicleMovement">
+                    <label class="form-check-label" for="vm1">
+                        Vehicle Movement
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="e1" name="escch" [(ngModel)]="serviesCheck.escalation">
+                    <label class="form-check-label" for="e1">
+                        Escalation
+                    </label>
+                </div>
+
+
+            </div>
+            <!-- <button class="btn btn-primary" (click)="logservice()">log</button> -->
+
+
+
+
+
+
+            <div class="row m-2 justify-content-end ">
+                <!--<div class="col-2 m-0 p-0 "><button class="btn w-100 btn-outline-success float-right " (click)="save() ">Save</button></div>-->
+                <!--<div class="col-2 m-0 p-0 "><button (click)="save() ">Save</button></div> -->
+                <button type="button" class="btn btn-outline-success" style="margin-right: 30%" [disabled]="!f.form.valid" (click)="save(f)">Save</button>
+            </div>
+
+
+        </form>
+
+
+    </div>
+</div>

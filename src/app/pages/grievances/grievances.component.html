@@ -1,0 +1,144 @@
+<div class="row"></div>
+<br>
+<div class="row"></div>
+<div class="row mt-5 pt-2">
+    <div class="col-12 mb-2">
+        <button type="button" (click)="backClicked()" class="btn w-100 col-xs-2 btn-secondary text-center">
+                <span class="mt-4">
+                    <i class="fas fa-long-arrow-alt-left"></i>
+                </span>
+                <span class="mt-0"> Back</span>
+            </button>
+    </div>
+    <div class="col-12">
+        <div class="">
+            <h3 class="">Grievances</h3>
+        </div>
+    </div>
+
+</div>
+
+<!-- <div class="row m-2 mt-3 pt-2">
+    <button type="button" (click)="backClicked()" class="btn  col-xs-2 btn-light"><i class="material-icons">
+            arrow_back
+        </i>
+    </button>
+
+    <div class="pt-3">
+        <h3> Grievances</h3>
+    </div>
+</div> -->
+<!--<div class="row">
+    <h3> Grievances</h3>
+</div> -->
+
+<!-- <app-userdetails [employee]="employee" [dependencyheading]="heading" [dependencybody]="dependencybody">
+</app-userdetails> -->
+
+<div class="row" style="margin-top:5%;margin-bottom:10%">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    Lodge your Grievances
+                </div>
+                <form #f='ngForm'>
+
+                    <div class="form-group m-2">
+                        <label>Type</label><span class="required">*</span>
+                        <select class="form-control" [(ngModel)]="typesOfGrievances" name="typee" #typee='ngModel' required>
+                        <option value="Query">Query</option>
+                        <option value="Escalation">Escalation</option>
+                        <option value="Compalaint">Complaint</option>
+                        <option value="Others">Others</option>
+
+
+                    </select>
+                        <!-- <input type="text" class="form-control" [(ngModel)]="natureOfGrievances" /> -->
+                        <div [hidden]="typee.valid || typee.pristine" class="alert alert-danger m-2">Fill valid option </div>
+
+                    </div>
+                    <div class="form-group row m-2" *ngIf="typesOfGrievances=='Others'">
+                        <input id="typeahead-basic" type="text" name="dep1" #dep1='ngModel' class="form-control" [(ngModel)]="natureofReason" pattern="[a-zA-Z]{1,80}" required/>
+
+                    </div>
+
+                    <div class="form-group m-2">
+                        <label>Nature of Grievances</label><span class="required">*</span>
+                        <select class="form-control" [(ngModel)]="natureOfGrievances" name="sd" #sd='ngModel' required>
+                            <option value="Flight Booking">Flight Booking</option>
+                            <option value="Hotel Booking">Hotel Booking</option>
+                            <option value="Goods Movement">Goods Movement</option>
+                            <option value="Vehicle Movement">Vehicle Movement</option>
+                            <option value="Expense Reimbursements">Expense Reimbursements</option>
+                            <option value="Cab Booking">Cab booking</option>
+                            <option value="Others">Others</option>
+                    
+                        </select>
+                        <div [hidden]="sd.valid || sd.pristine" class="alert alert-danger m-2">Fill valid option </div>
+                        <!-- <input type="text" class="form-control"  /> -->
+
+                    </div>
+
+                    <div class="form-group row m-2" *ngIf="natureOfGrievances=='Others'">
+                        <input id="typeahead-basic" type="text" name="dep2" #dep2='ngModel' class="form-control" [(ngModel)]="natureofReason1" pattern="[a-zA-Z]{1,80}" required/>
+
+                    </div>
+
+
+
+
+
+
+
+
+                    <div class="form-group m-2">
+                        <label>Description</label><span class="required">*</span>
+                        <textarea type="text" class="form-control" name="Description" #Description='ngModel' [(ngModel)]="otherRemarks" required>
+                  </textarea>
+                        <div [hidden]="Description.valid || Description.pristine" class="alert alert-danger m-0 mt-2">Fill valid details</div>
+                        <!-- <div class="help-block" *ngIf="otherRemarks.touched && !otherRemarks.required">
+                    It can't be empty                </div>
+                    <div class="help-block" *ngIf="otherRemarks.touched && otherRemarks.invalid">
+                      Enter the valid format of input only
+                    </div> -->
+                    </div>
+
+
+                    <div class="form-group m-2">
+
+                        <div class=" form-group input-group my-3  mr-4 ">
+                            <!-- <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupFileAddon01"> Upload</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" accept="image/*" (change)="handleInputChange($event)">
+                                <label class="custom-file-label" for="inputGroupFile01">Choose photo</label>
+
+                            </div> -->
+                            <div class=" form-group input-group my-3  mr-4 ">
+                                <p class="form-label-group "> Upload</p>
+                                <input type="file" class="form-control-file" accept="image/*" (change)="handleInputChange($event)">
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="alert alert-info m-2" role="alert">
+                        <h6><b>NOTE: </b> Please upload an image less than 100kb.</h6>
+                    </div>
+
+                    <img [src]="imageSrc" *ngIf="imageSrc" height="auto" width="50%" />
+
+
+                    <button type="button " class="m-2 float-right btn btn-outline-success" [disabled]="!f.form.valid" (click)="saveRequest(f)">Save</button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

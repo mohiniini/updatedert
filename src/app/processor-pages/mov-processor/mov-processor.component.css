@@ -1,0 +1,14 @@
+.btn-outline-orange:hover{
+    color: white;
+    background-color: darkorange;
+}
+.btn-outline-orange{
+    color: darkorange;
+}
+.bg-lightGray{
+    background-color: #EAEAEA;
+}
+.border-modify{
+    border-style: solid;
+    border-color: #E3CD81;
+}

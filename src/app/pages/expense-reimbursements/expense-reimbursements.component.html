@@ -1,0 +1,109 @@
+<div class="row"></div>
+<br>
+<div class="row"></div>
+
+<div class="row mt-5 pt-2">
+    <div class="col-12 mb-2">
+        <button type="button" (click)="backClicked()" class="btn w-100 col-xs-2 btn-secondary text-center">
+            <span class="mt-4">
+                <i class="fas fa-long-arrow-alt-left"></i>
+            </span>
+            <span class="mt-0"> Back</span>
+        </button>
+    </div>
+    <div class="col-12">
+        <div class="">
+            <h3 class="">Expense Reimbursements</h3>
+        </div>
+    </div>
+
+</div>
+<!--<div class="row m-2 mt-4">-->
+<!-- <div class="row m-2 mt-3 pt-2">
+    <button type="button" (click)="backClicked()" class="btn  col-xs-2 btn-light"><i class="material-icons">
+      arrow_back
+    </i>
+  </button>
+    <div class="pt-3">
+        <h3>Expense Reimbursements</h3>
+    </div>
+</div> -->
+
+
+
+<!-- <app-userdetails [employee]="employee" [dependencyheading]="heading" [dependencybody]="dependencybody"></app-userdetails> -->
+
+<div class="row" style="margin-top:5%;margin-bottom:10%">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    Submit Expenses
+                </div>
+                <form #f='ngForm'>
+
+                    <div class="form-group m-2">
+                        <label>Nature of expense</label><span class="required">*</span>
+                        <!--<input type="text" class="form-control" [(ngModel)]="natureOfExpense" /> -->
+                        <select class="form-control" name="ddf" #ddf='ngModel' [(ngModel)]="natureOfExpense" required>
+                <option value="Flight Booking">Flight Booking</option>
+                <option value="Hotel Booking">Hotel Booking</option>
+                <option value="Goods Movement ">Goods Movement </option>
+                <option value="Vehicle Movement">Vehicle Movement</option>
+                <option value="Cab booking">Cab booking</option>
+    
+              </select>
+                    </div>
+
+                    <div class="form-group m-2">
+                        <label>Amount</label><span class="required">*</span>
+                        <input type="number" class="form-control" name="amount1" #amount1='ngModel' [(ngModel)]="amount" pattern="[0-9]{1,}" required>
+
+                    </div>
+
+                    <!--  <div class="form-group m-2">
+                    <label>Purchase item</label>
+                    <input type="text" class="form-control" name="itemPuschase" [formControl]="itemPuschase" pattern="[a-zA-Z0-9]{3,}" required>
+
+                </div>-->
+
+
+                    <div class="form-group m-2">
+                        <label>Invoice no</label><span class="required">*</span>
+                        <input type="text" class="form-control" name="invoiceno1" #invoiceno1='ngModel' [(ngModel)]="invoiceNo" required>
+                        <div [hidden]="invoiceno1.valid ||invoiceno1.pristine" class="alert alert-danger m-0 mt-2">Fill Valid Invoice Number. </div>
+
+                    </div>
+
+
+
+                    <div class="form-group m-2">
+
+                        <div class=" form-group input-group my-3  mr-4 ">
+                            <!-- <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupFileAddon01"> Upload</span>
+                            </div> -->
+                            <!-- <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" accept="image/*" (change)="handleInputChange($event)">
+                                <label class="custom-file-label" for="inputGroupFile01">Choose invoice Image file</label>
+                            </div> -->
+                            <div class=" form-group input-group my-3  mr-4 ">
+                                <p class="form-label-group "> Upload</p>
+                                <input type="file" class="form-control-file" accept="image/*" (change)="handleInputChange($event)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info m-2" role="alert">
+                        <h6><b>NOTE: </b> Please upload an image less than 100kb.</h6>
+                    </div>
+
+                    <img [src]="imageSrc" *ngIf="imageSrc" style="max-width:500px;max-height:300px" />
+
+
+                    <button type="button " class="m-2 float-right btn btn-outline-success" [disabled]="!f.form.valid" (click)="saveRequest(f)">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,123 @@
+<div class="card-body ">
+
+  <div class="row">
+    <p class="lead col-12">Request ID: {{data.requestkey}}</p>
+    <p class="lead col-12">Type: {{data.type}}</p>
+    <p class="lead col-12" *ngIf="data.npeople>0">No of People: {{data.npeople}}</p>
+    <p class="lead col-12" *ngIf="data.npeople==0&&(data.type=='Flight Booking'||data.type=='Hotel Booking')">No of People: 1(self)</p>
+
+    <div class="lead col-12" *ngIf="data.guests.length>0">guest:
+
+      <div class="lead col-auto ml-5 " *ngFor="let item of data.guests;let i = index">{{i+1}}) {{item.item_text}}</div>
+    </div>
+
+  </div>
+  <div class="row mt-4">
+    <div class="col-12  " [ngSwitch]="data.type">
+      <div class="lead col-12 ml-0 pl-0" *ngSwitchCase="'Flight Booking'">
+
+          <p class="lead col-12">Request ID: {{data.requestkey}}</p>
+          <p class="lead col-12">Type: {{data.type}}</p>
+          <p class="lead col-12" *ngIf="data.npeople>0">No of People: {{data.npeople}}</p>
+          <p class="lead col-12" *ngIf="data.npeople==0&&(data.type=='Flight Booking'||data.type=='Hotel Booking')">No of People: 1(self)</p>
+      
+          <div class="lead col-12" *ngIf="data.guests.length>0">guest:
+      
+            <div class="lead col-auto ml-5 " *ngFor="let item of data.guests;let i = index">{{i+1}}) {{item.item_text}}</div>
+          </div>
+        <div class="col-12 ml-0 pl-0 lead">Arrival: {{data.detail.arr}}</div>
+        <div class="col-12 ml-0 pl-0 lead">Departure: {{data.detail.dep}}</div>
+        <div class="col-12 ml-0 pl-0 lead">Date of Booking: {{data.detail.date| date:"MM/dd/yyy"}}</div>
+        <div class="col-12 ml-0 pl-0 lead">Date of Journey:
+          {{data.detail.dot.day}}/{{data.detail.dot.month}}/{{data.detail.dot.year}}</div>
+        <div class="col-12 ml-0 pl-0 lead">Time of Journey: {{data.detail.tot.hour}}:{{data.detail.tot.minute}}</div>
+        <div class="col-12 ml-0 pl-0 lead">Meal: {{data.detail.meal}}</div>
+      </div>
+      <div class="lead col-12 ml-0 pl-0" *ngSwitchCase="'Hotel Booking'">
+
+
+        
+        <div class="col-12 ml-0 pl-0 lead">Date of Booking: {{data.detail.date| date:"MM/dd/yyy"}}</div>
+
+        <div class="col-12 ml-0 pl-0 lead">No of Rooms: {{data.detail.noroooms}}</div>
+        <div class="col-12 ml-0 pl-0 lead" *ngIf="data.detail.splitaccommodation">Split Accommodation: Yes</div>
+        <div class="col-12 ml-0 pl-0 lead" *ngIf="data.detail.splitaccommodation">Reason for split:
+          {{data.detail.reasonforsplit}}</div>
+      </div>
+      <div class="lead col-12 ml-0 pl-0" *ngSwitchCase="'Goods Movement'">
+
+          <div class="col-12 ml-0 pl-0 lead">Contact Person: {{data.detail.contactperson}}</div>
+
+           
+            
+            <div class="col-12 ml-0 pl-0 lead">Delivery Address: {{data.detail.deliveryadd}}</div>
+             
+              
+            <div class="col-12 ml-0 pl-0 lead">Booking Date: {{data.detail.date| date:"MM/dd/yyy"}}</div>
+    
+            
+      </div>
+      <div class="lead col-12 ml-0 pl-0" *ngSwitchCase="'Expense Reimbersement'">
+          <div class="col-12 ml-0 pl-0 lead">Nature of expense: {{data.detail.natureofexpense}}</div>
+
+          <div class="col-12 ml-0 pl-0 lead">Item purchase:
+              {{data.detail.itempurschase}}</div>
+            
+            
+            <div class="col-12 ml-0 pl-0 lead">Invoice no: {{data.detail.invoiceno}}</div>
+            
+            
+            <img [src]="data.detail.invoiceimage" *ngIf="data.detail.invoiceimage" style="max-width:300px;max-height:300px"/>
+
+            
+    
+      </div>
+      <div class="lead col-12 ml-0 pl-0" *ngSwitchCase="'Grievances'">
+           
+
+          <div class="col-12 ml-0 pl-0 lead">Action Requested:
+              {{data.detail.actionrequested}}</div>
+            
+            <div class="col-12 ml-0 pl-0 lead">Other Remarks: {{data.detail.otherremarks}}</div>
+            
+            
+           
+
+            
+            <hr><p>image:</p>
+            <img [src]="data.detail.photo" *ngIf="data.detail.photo" style="max-width:300px;max-height:300px"/> 
+
+            
+      </div>
+      <div class="lead col-12 ml-0 pl-0" *ngSwitchCase="'Vehicle Movement'">
+          <div class="col-12 ml-0 pl-0 lead">Contact Person: {{data.detail.contactperson}}</div>
+
+          
+            
+            
+            <div class="col-12 ml-0 pl-0 lead">No of RTO's : {{data.detail.noRto}}</div>
+            <div class="col-12 ml-0 pl-0 lead">RTO Amount: {{data.detail.rtoAmount}}</div>
+            <div class="col-12 ml-0 pl-0 lead">RTO invoice no: {{data.detail.rtoInvoiceNo}}</div>
+
+            <hr><p>image:</p>
+            <img [src]="data.detail.invoiceimage" *ngIf="data.detail.invoiceimage" style="max-width:300px;max-height:300px"/> 
+
+
+      </div>
+      <div class="lead col-12 ml-0 pl-0" *ngSwitchCase="'Query Resoultion'">
+          <div class="col-12 ml-0 pl-0 lead">Contact Person: {{data.detail.contactperson}}</div>
+
+          
+              <div class="col-12 ml-0 pl-0 lead">Ticket Number: {{data.detail.ticketno}}</div>
+            
+            <div class="col-12 ml-0 pl-0 lead">Response: {{data.detail.reponse}}</div>
+            
+
+            <hr><p>image:</p>
+            <img [src]="data.detail.photo" *ngIf="data.detail.photo" style="max-width:300px;max-height:300px"/> 
+      </div>
+
+    </div>
+
+  </div>
+</div>

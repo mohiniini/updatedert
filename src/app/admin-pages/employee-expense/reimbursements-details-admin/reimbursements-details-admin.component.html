@@ -1,0 +1,41 @@
+<div class="card shadow" *ngIf="request!==undefine">
+    <h5 class="card-title">
+        <div class="h3   font-weight-bold text-capitalize   mx-4 mt-4">
+            Hotel Booking Detail
+        </div>
+    </h5>
+    <div class="card-body mx-5 ">
+        <div class="lead"></div>
+
+        <div class="lead">Name: {{request.data.name}}</div>
+
+
+        <div class="lead">Nature of Expense : {{request.data.detail.natureofexpense}}</div>
+        <!--<div class="lead">
+            Item Purchase : {{request.data.detail.natureofexpense}}
+
+        </div>-->
+
+
+
+        <div class="lead">
+            Amount : Rs {{request.data.detail.amount}}
+        </div>
+
+        <div class="lead">
+            Date of Booking : {{request.data.detail.date | date:'fullDate'}}
+
+        </div>
+        <div class="row mt-4 justify-content-start " *ngIf="request.data.detail.invoiceimage">
+
+
+            <figure class="figure">
+                <img [src]="request.data.detail.invoiceimage" class="figure-img img-fluid rounded" *ngIf="request.data.detail.invoiceimage  " style="max-width:300px;max-height:300px" />
+                <!--  -->
+            </figure>
+
+        </div>
+
+
+    </div>
+</div>

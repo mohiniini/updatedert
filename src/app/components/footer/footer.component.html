@@ -1,0 +1,65 @@
+<footer class="footer mt-3 py-0 p-0 " *ngIf="FooterExistance">
+    <div class="row justify-content-center bg-danger p-0 m-0" *ngIf="goUp()">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12">
+                    <a class="btn bg-transparent text-white w-100" (click)="toggleup()">
+                        <i class="fas fa-angle-up" *ngIf="!up"></i>
+                        <i class="fas fa-angle-down" *ngIf="up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="row mb-4" *ngIf="up">
+                <div class="col-12 ">
+                    <div class="row mx-1 border-top"></div>
+
+                    <div class="row  justify-content-center ">
+                        <div class="col-auto mt-3  col-md-auto  mt-md-2  text-white" (click)="OpenHome()">
+                            <i class="material-icons icon "> home </i><span class="d-block sizefon text-capitalize">home</span>
+                        </div>
+                        <div class="col-auto mt-3   col-md-auto mt-md-2   text-white" (click)="OpenNew()">
+                            <i class="material-icons icon "> group_add </i><span class="d-block sizefon text-capitalize">add dependent</span>
+                        </div>
+                        <div class="col-auto mt-3   col-md-auto mt-md-2   text-white" (click)="Openprofile()">
+                            <i class="material-icons icon "> perm_identity </i><span class="d-block sizefon text-capitalize">profile</span>
+                        </div>
+                        <div class="col-auto mt-3    col-md-auto mt-md-2   text-white" (click)="OpenActivity()">
+                            <i class="material-icons icon"> library_books </i><span class="d-block sizefon  text-capitalize">activity</span>
+                        </div>
+                        <div class="col-auto mt-3   col-md-auto mt-md-2    text-white" (click)="Openfight()" *ngIf="emp.data.service.flightBooking">
+                            <i class="material-icons icon"> flight_takeoff </i><span class="d-block sizefon  text-capitalize">flight</span>
+                        </div>
+                        <div class="col-auto mt-3   col-md-auto mt-md-2   text-white" (click)="Openhotel()" *ngIf="emp.data.service.hotelBooking">
+                            <i class="material-icons icon"> hotel </i><span class="d-block  sizefon  text-capitalize">hotel</span>
+                        </div>
+                        <div class="col-auto mt-3    col-md-auto mt-md-2  text-white" (click)="Opengoods()" *ngIf="emp.data.service.goodsMovement">
+                            <i class="material-icons icon"> local_shipping </i><span class="d-block sizefon  text-capitalize">Goods Movement </span>
+                        </div>
+                        <div class="col-auto mt-3    col-md-auto mt-md-2   text-white" (click)="Openvehicle()" *ngIf="emp.data.service.vehicleMovement">
+                            <i class="material-icons icon"> directions_car </i><span class="d-block  sizefon text-capitalize">Vehicle Movement</span>
+                        </div>
+                        <div class="col-auto mt-3    col-md-auto mt-md-2   text-white" (click)="Opencab()" *ngIf="emp.data.service.cabBooking">
+                            <i class="material-icons icon "> commute </i><span class="d-block sizefon  text-capitalize">cab booking</span>
+                        </div>
+                        <div class="col-auto mt-3   col-md-auto mt-md-2   text-white" (click)="OpenExpense()" *ngIf="emp.data.service.expenseRiembursements">
+                            <i class="material-icons icon"> local_atm </i><span class="d-block  sizefon  text-capitalize">Reimbursements</span>
+                        </div>
+                        <div class="col-auto mt-3    col-md-auto mt-md-2   text-white" (click)="OpenGrievences()" *ngIf="emp.data.service.escalation">
+                            <i class="material-icons icon"> ring_volume </i><span class="d-block sizefon  text-capitalize">Grievances</span>
+                        </div>
+                        <div class="col-auto mt-3    col-md-auto mt-md-2   text-white" (click)="Openpolicyholder()">
+                            <i class="material-icons icon"> policy </i><span class="d-block sizefon  text-capitalize">Policy Holder</span>
+                        </div>
+                        <div class="col-auto mt-3    col-md-auto mt-md-2   text-white" (click)="Openfaq()">
+                            <i class="material-icons icon"> feedback </i><span class="d-block sizefon  text-capitalize">FAQ</span>
+                        </div>
+                        <!--<div class="col-auto mt-3    col-md-auto mt-md-2   text-white" (click)="Openfeedback()">
+                            <i class="material-icons icon"> feedback </i><span class="d-block sizefon  text-capitalize">Feedback</span>
+                        </div>-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
